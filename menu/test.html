@@ -1,0 +1,22 @@
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+</head>
+
+<form method="POST" action="hogehoge.php">
+  <table>
+    <tr>
+      <th>rank</th>
+      <th>artcle_id</th>
+    </tr>
+    <?php for ($i = 1; $i < 6; $i++) { ?>
+    <tr>
+      <td><?php echo $i; ?></td>
+      <td><input type="text" name="<?php echo "article_id_" . $i ?>"</td>
+    </tr>
+    <?php } ?>
+  </table>
+  <input type="submit" value="変更">
+</form>
+</body>
+</html>
