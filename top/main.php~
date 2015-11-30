@@ -1,15 +1,5 @@
 <?php
-session_start();
-if(
-$_SESSION['Password']==""||
-!$_SESSION['Name']){
-print"ログインされてません。";
-exit();
-}else{
-}
-
-
-
+header("Content-Type:text/html;charset=UTF-8");
 ?>
 <!DOCTYPE html>
 <html>

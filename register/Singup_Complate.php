@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+
+	session_start();
+	
+?>
+
 <html>
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
@@ -37,6 +42,3 @@
 	</body>
 </html>
 
-
-<?php
-?>
