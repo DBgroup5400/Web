@@ -1,5 +1,26 @@
 <?php
-header("Content-Type:text/html;charset=UTF-8");
+session_start();
+
+// ログイン状態のチェック
+if (!isset($_SESSION["USERID"])) {
+  header("Location: /top/login_2.php");
+  exit;
+}
+if (isset($_POST["logout"])) {
+  // セッション変数のクリア
+$_SESSION = array();
+// クッキーの破棄は不要
+//if (ini_get("session.use_cookies")) {
+//    $params = session_get_cookie_params();
+//    setcookie(session_name(), '', time() - 42000,
+//        $params["path"], $params["domain"],
+//        $params["secure"], $params["httponly"]
+//    );
+//}
+// セッションクリア
+@session_destroy();
+  header("Location: /top/top.html");
+}
 ?>
 <!DOCTYPE html>
 <html>

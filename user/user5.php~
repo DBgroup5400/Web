@@ -5,7 +5,7 @@ header("Content-Type:text/html;charset=UTF-8");
 <html>
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
-	<link rel="stylesheet"type="text/css"href="user4.css">
+	<link rel="stylesheet"type="text/css"href="user5.css">
 	<title>Reciprice</title>
 
 </head>
@@ -45,26 +45,12 @@ header("Content-Type:text/html;charset=UTF-8");
  		
 		
         <form method="post"action=""accept-charset="UTF-8">
-		<div class=like>
-		食材名
-		</div>
-		<div class=dislike>
-		価格
-		</div>
-
-        <input class="box1"type="text"name="name_1"maxlength="10">
-		<input class="box2"type="text"name="name_2"maxlength="10">
-		<input class="box3"type="text"name="name_3"maxlength="10">
-        <input class="box4"type="text"name="name_4"maxlength="10">
-		<input class="box5"type="text"name="price_1"pattern="^[0-9]+$"maxlength="10">
-        <input class="box6"type="text"name="price_2"pattern="^[0-9]+$"maxlength="10">
-        <input class="box7"type="text"name="price_3"pattern="^[0-9]+$"maxlength="10">
-        <input class="box8"type="text"name="price_4"pattern="^[0-9]+$"maxlength="10">
-
-        <input class="button_submit"type="submit"name="register"value="変更を保存">
-		
+		<input class="delete"type="submit"name="delete"value="ユーザを削除">
+        <input class="button_submit"type="submit"name="logout"value="ログアウト">
+		</form>	
 	</body>
 </html>
+
 
 <?php
 
