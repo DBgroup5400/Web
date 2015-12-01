@@ -60,6 +60,7 @@ header("Content-Type:text/html;charset=UTF-8");
 		$Week[7][4];
 		$Sunday = $_GET['Sunday'];
 		$Week[0] = explode( '|', $Sunday);
+		// var_dump($Week[0][2]);
 		// $Monday = $_GET['Monday'];
 		// $Week[1] = explode( '|', $Monday);
 		// $Tuesday = $_GET['Thesday'];
@@ -74,6 +75,8 @@ header("Content-Type:text/html;charset=UTF-8");
 		// $Week[6] = explode( '|', $Saturday);
 
 		$NameArray = explode( '|', $nametotal);
+
+		// var_dump($nametotal);
 		// var_dump($NameArray);
 		// var_dump($Week[1][1]);
 
@@ -91,10 +94,17 @@ header("Content-Type:text/html;charset=UTF-8");
 				?>
 				<?php
 					$hoge = $Week[($j-1)][$i];
-					echo "<td><a href='/item/item.php' style='text-decoration:none;'>";
-					echo "<input class='kadomaru' type='button' value='$hoge $money'></a></td>";
-					break;
+					$url = "./../item/item.php?recipe=".urlencode($hoge);
 				?>
+					<td>
+					<a href= <?= $url ?> style='text-decoration:none;'>
+					<input class='kadomaru' type='button' value='<?= $hoge.$money ?>'>
+					<!-- <input type='hidden' name='recipe' value='$NameArray[$i]]'> -->
+					</a>
+					</td>
+
+				<?php	break; ?>
+
 				<?php
 				case 5: case 6:
 				case 7: case 8:

@@ -1,11 +1,11 @@
 <?php
 	//[ ramdom.php ]
 	/*
-	debugデータを元のデータから弾いた組み合わせをsy津力するようなアルゴリズムの構成を作る.    ◯ 
+	debugデータを元のデータから弾いた組み合わせをsy津力するようなアルゴリズムの構成を作る.    ◯
 	debugデータからでなく繰り返し処理で, 前のデータの食事内容を取得し, 置き換え.						 ☓
 	実装方法は, 全組み合わせを作成したあと, ランダムにそれらのフラグをつけていく.
 	*/
-	
+
 	// $obj_hogehoge = new hogehoge;
 	// $buf = $obj_hogehoge->SELECT();
 
@@ -46,7 +46,7 @@ class hogehoge{
 
 			# 全パターンの格納
 			$p = getCPattern($source_diff, GET_COMBINATION ); //返ってくるのは全ての組み合わせを格納した配列
-		
+
 		  # 文字列の連結
 			foreach($p as $combineKeys1 => $i_val){
 				foreach($i_val as $combineKeys2 => $j_val ){
@@ -70,11 +70,11 @@ class hogehoge{
 			$arrayNum[$rand_keys]++;
 			$shift++;
 
-			// foreach ($arrayNum as $key => $val) 
+			// foreach ($arrayNum as $key => $val)
 				// if($val == 1)
 					// print(sprintf("%-20s=>%8d\n", $key, $val));
 
-			foreach ($arrayNum as $key => $val) 
+			foreach ($arrayNum as $key => $val)
 				if($val == 1){
 					$buf[$buf_num] = $key;
 					$buf_num++;
@@ -82,7 +82,7 @@ class hogehoge{
 
 
 			#要素の追加
-			foreach ($arrayNum as $key => $val) 
+			foreach ($arrayNum as $key => $val)
 				if($val == 1)
 					$tmp = str_getcsv($key, ","); // カンマで文字列を区切る.
 				$parse = array_merge($parse, $tmp);
@@ -107,7 +107,7 @@ class hoge{/*
 	}*/
 	//$kindによって取得するカテゴリ変更
 	function GET_NAME($kind){
-		
+
 		$recipi_name = array();
 
 		//$kindを参照して, dish, main, sub, soupを分けて, 料理名を持ってくる関数
@@ -115,7 +115,7 @@ class hoge{/*
 		array_push($recipi_name , "薄切り牛肉のカツ", "豚肉のしょうが焼き", "豚の角煮", "豚汁", "肉だんご(豚)");	//ダミー
 		array_push($recipi_name , "コロッケ", "エビフライ", "サバの味噌煮", "カレー", "サンマの塩焼き");	//ダミー
 		array_push($recipi_name , "かつおのたたき", "春巻き", "唐揚げ", "すし", "ラーメン");	//ダミー
-		
+
 		return $recipi_name[(rand(0, count($recipi_name))%10)];
 	}
 
@@ -150,7 +150,7 @@ class hoge{/*
 
 	function isUniqueArray ($rensou, $name) {
 		$array = array_keys($rensou);
-		
+
 		foreach ($array as $key => $value) {
 			if($value == $name)
 				return false;
@@ -162,11 +162,13 @@ class hoge{/*
 		//料理IDから値段を取得
 		$obj= new hoge;
 
-		//from test.php 
-		require_once "./GetData/libdb.php";
-		require_once "./GetData/libfoodstuff.php";
-		require_once "./GetData/libmenu.php";
-		$tmp = new Menu( "localhost", "root", "" );
+		//from test.php
+		// require_once "./GetData/libdb.php";
+		// require_once "./GetData/libfoodstuff.php";
+		// require_once "./GetData/libmenu.php";
+		require_once "../libmenu/user.php";
+		$tmp = user();
+		// $tmp = new Menu( "localhost", "root", "" );
 		// var_dump( $tmp->GetMenuList( 0, 0, 0, "0011" ) );
 
 		$recipe = array();
@@ -186,7 +188,7 @@ class hoge{/*
 			//料理ID取得
 			$id = $obj->toID($recipi_name);
 			// print_r($id);
-			
+
 			// 料理の材料取得
 			$material = array();
 			$material = $obj->GET_MATERIAL($id);
@@ -209,11 +211,11 @@ class hoge{/*
 				$count++;
 				$ten_miss = 0;
 			}
-			
+
 			$ten_miss++;
 			// printf("ten_miss:%d\n", $ten_miss);
 			// var_dump($ten_miss);
-		}//end while 
+		}//end while
 		// print_r($recipe);
 		return $recipe;
 	}// end function

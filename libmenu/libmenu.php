@@ -112,6 +112,8 @@ class Menu extends Foodstuff{
       $return[$i]["Amount"] = $record["Amount"];
       $return[$i]["Unit"] = $record["Amount"];
     }
+    if( $i == 0 )
+      return -1;
 
     return $return;
   }

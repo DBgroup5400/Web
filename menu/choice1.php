@@ -13,7 +13,7 @@ header("Content-Type:text/html;charset=UTF-8");
 	<!--ヘッダとサイド-->
 	<div class="side">
 	</div>
-	<div class="header">        
+	<div class="header">
 		<a href="/top/main.php"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
 	</div>
 	<a href="/user/user.php">
@@ -40,13 +40,13 @@ header("Content-Type:text/html;charset=UTF-8");
 	<a href="menu5.php">
 		<input class="button_8"type="button"value="5週目">
 	</a>
-	
+
 	<!--ヘッダとサイドおわり-->
 	<!--ページごとに週を送る→-日付を得る→日付ごとのメニューを表示→-それぞれのボタンにメニューIDを→遷移先にメニューID送る→IDをもとに材料表示-->
 	<?php
 	$money=0;
 	$button=0;
-	
+
 	for($i = 0; $i <=10; $i++)
 		$flag[$i] = 0;
 
@@ -66,7 +66,7 @@ header("Content-Type:text/html;charset=UTF-8");
 	$yosan = $yosan - $money;
 
 		// var_dump($money);
-		//挿入部 
+		//挿入部
 
 		/*
 			現状ランダムな金額を挿入していきている．
@@ -102,7 +102,7 @@ header("Content-Type:text/html;charset=UTF-8");
 		echo'<div class="menu_table">';
 		echo' <table cellpadding="10">';
 		echo'<form method="post"action="">';
-		
+
 		function printButton( $yosan, $yen, $i, $food){
 			if($yosan >= $yen){
 				echo $i % 2 == 1 ? '<tr>' : '';
@@ -139,7 +139,7 @@ header("Content-Type:text/html;charset=UTF-8");
 		echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
 		echo'</form></table></div>';
 
-		
+
 
 
 		echo'<div class="menu_table2">';
@@ -152,11 +152,11 @@ header("Content-Type:text/html;charset=UTF-8");
 		for($i = 1; $i < count($NameArray); $i++ ){
 			printButton($yosan, $NameArray[$i], $i, $food);
 		}
-		
+
 
 		// echo'<input type="hidden"name="kane"value="'.$yosan.'">';
 		// echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
-		
+
 		echo'</form>';
 		echo'</form></table></div>';
 
@@ -182,17 +182,17 @@ header("Content-Type:text/html;charset=UTF-8");
 			printButton($yosan, $yen[$i], $i, $food);
 		}
 
-		
+
 		// echo'<input type="hidden"name="kane"value="'.$yosan.'">';
 		// echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
-		
+
 		echo'</form>';
 		echo'</form></table></div>';
 	*/
 		?>
-		
+
 	</table>
-	
+
 	<div>
 
 		<table class="Day2" cellpadding="10">
@@ -210,7 +210,7 @@ header("Content-Type:text/html;charset=UTF-8");
 			</tr>
 		</table>
 	</div>
-	
+
 	<?php
 	//sunday
 	echo'<input class="button_9"type="button"value='.'残予算'.''.$yosan.''.'円'.'>';
