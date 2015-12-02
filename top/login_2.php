@@ -14,14 +14,14 @@ $errorMessage = "";
 // ログインボタンが押された場合
 if (isset($_POST["login"])) {
   // １．ユーザIDの入力チェック
-  if (empty($_POST["userid"])) {
-    $errorMessage = "ユーザIDが未入力です。";
+  if (empty($_POST["mail"])) {
+    $errorMessage = "メールアドレスが未入力です。";
   } else if (empty($_POST["password"])) {
     $errorMessage = "パスワードが未入力です。";
   } 
 
   // ２．ユーザIDとパスワードが入力されていたら認証する
-  if (!empty($_POST["userid"]) && !empty($_POST["password"])) {
+  if (!empty($_POST["mail"]) && !empty($_POST["password"])) {
     // mysqlへの接続
     $mysqli = new mysqli($db['host'], $db['user'], $db['pass']);
     if ($mysqli->connect_errno) {
@@ -33,10 +33,10 @@ if (isset($_POST["login"])) {
     $mysqli->select_db($db['dbname']);
 
     // 入力値のサニタイズ
-    $userid = $mysqli->real_escape_string($_POST["userid"]);
+    $mail = $mysqli->real_escape_string($_POST["mail"]);
 
     // クエリの実行
-    $query = "SELECT * FROM Users WHERE Users_name = '" . $userid . "'";
+    $query = "SELECT * FROM Users WHERE Mail = '" . $mail . "'";
     $result = $mysqli->query($query);
     if (!$result) {
       print('クエリーが失敗しました。' . $mysqli->error);
@@ -47,6 +47,7 @@ if (isset($_POST["login"])) {
     while ($row = $result->fetch_assoc()) {
       // パスワード(暗号化済み）の取り出し
       $db_hashed_pwd = $row['Psssword'];
+	$userid = $row['ID'];
     }
 
     // データベースの切断
@@ -57,7 +58,7 @@ if (isset($_POST["login"])) {
     if (password_verify($_POST["password"], $db_hashed_pwd)) {
       // ４．認証成功なら、セッションIDを新規に発行する
       session_regenerate_id(true);
-      $_SESSION["USERID"] = $_POST["userid"];
+      $_SESSION["USERID"] = $userid;
       header("Location: /top/main.php");
       exit;
     } 
@@ -90,7 +91,7 @@ if (isset($_POST["login"])) {
 		<form id="loginForm"name="loginForm"method="post"action=""accept-charset="UTF-8">
 		<table cellspacing="30">
 		<tr>
-			<td>User Name</td><td><input type="text"name="userid"pattern="^[a-zA-Z0-9]+$"maxlength="20"required></td>
+			<td>Mail</td><td><input type="text"name="mail"maxlength="40"required></td>
 		</tr>
 		<tr>
 			<td>Pass Word</td><td><input type="password"name="password"pattern="^[a-zA-Z0-9]+$"maxlength="20"required></td>
