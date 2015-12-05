@@ -296,6 +296,7 @@ input.button_4{
       border:none;
 
 
+
     background-color:#FC9E63;
     color:#FFFFFF;
     top:150px;
@@ -311,7 +312,7 @@ input.button_4{
 }
 input.button_5{
     position:absolute;
-      border:2px;
+	border:2px;
     border-style:solid none solid solid;
     background-color:#FC9E63;
     color:#FFFFFF;

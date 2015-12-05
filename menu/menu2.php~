@@ -1,4 +1,5 @@
 <?php
+require_once'liblog.php';
 session_start();
 
 // ログイン状態のチェック
@@ -28,11 +29,12 @@ $_SESSION = array();
 <?php
 header("Content-Type:text/html;charset=UTF-8");
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
-	<link rel="stylesheet"type="text/css"href="menu.css">
+	<link rel="stylesheet"type="text/css"href="menu2.css">
 	<title>Reciprice</title>
 
 </head>
@@ -74,38 +76,10 @@ header("Content-Type:text/html;charset=UTF-8");
     	<table cellpadding="10">
 
 		<?php
-		if(isset($_GET['text']))
-			$nametotal = $_GET['recipe'];
-
-		//hairetu tosite data uketoru
-		// $array = $_GET['sunday'];
-		// var_dump($array);
-
-		$Week[7][4];
-		$Sunday = $_GET['Sunday'];
-		$Week[0] = explode( '|', $Sunday);
-		var_dump($_SESSION["USERID"]);
-		// $Monday = $_GET['Monday'];
-		// $Week[1] = explode( '|', $Monday);
-		// $Tuesday = $_GET['Thesday'];
-		// $Week[2] = explode( '|', $Thesday);
-		// $Wednesday = $_GET['Wednesday'];
-		// $Week[3] = explode( '|', $Wednesday);
-		// $Thursday = $_GET['Thursday'];
-		// $Week[4] = explode( '|', $thursday);
-		// $Friday = $_GET['Friday'];
-		// $Week[5] = explode( '|', $Friday);
-		// $Saturday = $_GET['Saturday'];
-		// $Week[6] = explode( '|', $Saturday);
-
-		$NameArray = explode( '|', $nametotal);
-
-		// var_dump($nametotal);
-		// var_dump($NameArray);
-		// var_dump($Week[1][1]);
-
-		$hoge=$NameArray;
-		$money="300";
+			$log = new MenuLog('localhost', 'root','', $_SESSION["USERID"] );
+			$menulog = $log -> GetMenuLog($_SESSION["USERID"]);
+			//$menulog = array();
+			//var_dump($menulog);
 		?>
 
 		<?php for($i = 1; $i <= 10; $i++): ?>
@@ -119,13 +93,12 @@ header("Content-Type:text/html;charset=UTF-8");
 				<?php
 					$hoge = $Week[($j-1)][$i];
 					$url = "./../item/item.php?recipe=".urlencode($hoge);
-					$log = new MenuLog( 'localhost', 'root', , $_SESSION["USERID"] );
 				?>
 					<td>
-					<a href= <?= $url ?> style='text-decoration:none;'>
-					<input class='kadomaru' type='button' value='<?= $hoge.$money ?>'>
+					
+					<input class='kadomaru' type='button' value='hoge'>
 					<!-- <input type='hidden' name='recipe' value='$NameArray[$i]]'> -->
-					</a>
+					
 					</td>
 
 				<?php	break; ?>
@@ -140,8 +113,7 @@ header("Content-Type:text/html;charset=UTF-8");
 				<?php $url = "./choice1.php?message=".urlencode($Sunday) ?>
 				<td>
 						<a href=<?= $url ?> style='text-decoration:none;'>
-						<form name="aaa" action="./choice1.php" method="get" >
-							<input class='kadomaru_2' type='button' value='メニューの変更'>
+						
 							
 						</form>
 						</a>
@@ -150,11 +122,11 @@ header("Content-Type:text/html;charset=UTF-8");
 					break;
 				case 10:
 					if($j == 1)
-						echo"<td><input class='kadomaru_2'type='button'value='決定'></td>";
+						//echo"<td><input class='kadomaru_2'type='button'value='決定'></td>";
 					break;
 
 				default:
-					echo "erorr!!<\br>";
+					
 				?>
 				<?php endswitch; ?>
 			<?php endfor; ?>

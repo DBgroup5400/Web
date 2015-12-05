@@ -293,7 +293,8 @@ input.button_3{
 }
 input.button_4{
     position:absolute;
-      border:none;
+      border:2px;
+    border-style:solid none solid solid;
 
 
     background-color:#FC9E63;
