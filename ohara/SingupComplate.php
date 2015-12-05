@@ -1,66 +1,4 @@
 <?php
-
-
-
-/************エントリーポイント**************/
-
-	session_start();
-	
-	print <<< EOF
-<html>
-<head>
-	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
-	<link rel="stylesheet"type="text/css"href="register.css">
-	<title>Reciprice</title>
-
-</head>
-
-  <body>
-<div class="header">
-<a href="/top/top.html"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
-</div>
-
-    <div class="table">
-		登録が完了しました
-		<table cellspacing="30">
-        
-EOF;
-	printf("	
-			<tr>
-     	       <td> User &nbsp Name</td>
-     	       <td> %s </td>
-     	   	</tr>
-			" , $_SESSION['Name']);
-
-	printf("	
-			<tr>
-     	       <td>  Mail &nbsp Name</td>
-     	       <td> %s </td>
-     	   	</tr>
-			" , $_SESSION['Mail']);
-
-
-	printf("	
-			<tr>
-     	       <td> Adress &nbsp Name</td>
-     	       <td> %s </td>
-     	   	</tr>
-			" , $_SESSION['Address']);
-
-	print <<< EOF
-          
-
-        
-      </table>
-      
-    <div class="button">
-			<a href="/top/top.html"><input class="button_1"type="submit"name="register"value="topへ戻る"onclick="document.charset='UTF-8'"></a>
-			</div>
-		</div>
-
-  </body>
-</html>
-EOF;
 /*****************************************
 	区の名前から区のIDに変換します
 	$Name 区のID
@@ -186,7 +124,7 @@ EOF;
 		printf("\n\ndata = %d\n\n",$user_id);
 
 		
-		$query = sprintf("INSERT INTO  Users.Users VALUES('%06d','%s','%s','%s','%s','0','%s')",$user_id, $Passwd,$Mail,	$Name,	$Address,$Date);
+		$query = sprintf("INSERT INTO  Users.Users VALUES('%06d','%s','%s','%s','%s','%s' )",$user_id, $Passwd,$Mail,	$Name,	$Address,$Date);
 
 		printf("\n%s\n",$query);
  		$result = mysql_query( $query );
@@ -217,4 +155,3 @@ EOF;
 	session_destroy();
 
 ?>
-

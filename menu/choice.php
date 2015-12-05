@@ -100,7 +100,7 @@ header("Content-Type:text/html;charset=UTF-8");
 
 
 		echo'<div class="menu_table">';
-		echo' <table cellpadding="10">';
+		echo' <table cellpadding="0">';
 		echo'<form method="post"action="">';
 		
 		function printButton( $yosan, $yen, $i, $food){

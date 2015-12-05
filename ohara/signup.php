@@ -1,7 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Contents-Type" conten="text/html;charset=UTF-8">
+    <title> Sign up </title>
+  </head>
+
+  <body>
+    <center>
+      <font size='10'> Sign &nbsp up<br><br> </font>
+      <form method="post" action="">
+      <table>
+        <tbody>
+          <tr>
+            <th> User &nbsp Name</th>
+            <th> <input type="text" name="username"> </th>
+          </tr>
+          <tr>
+            <th> Password</th>
+            <th> <input type="password" name="password"> </th>
+          </tr>
+          <tr>
+            <th> Password Retype</th>
+            <th> <input type="password" name="password_r"> </th>
+          </tr>
+		  <tr>
+            <th> Mail </th>
+            <th> <input type="text" name="mail"> </th>
+          </tr>
+          <tr>
+            <th> Adress</th>
+            <th> <input type="text" name="address"> </th>
+          </tr>
+          <tr>
+            <th colspan=2> <input type="submit" name="send" value="send"> </th>
+          </tr>
+        </tbody>
+      </table>
+      </form>
+    </center>
+  </body>
+</html>
 
 <?php
-$error = "";
-if (isset($_POST["send"])) {
 /***********************************
 		住所情報文字列をGPS情報に変換
 		引数
@@ -86,18 +126,11 @@ if (isset($_POST["send"])) {
   	}
 	*/
 	//メールアドレスチェック
-	if(Is_Mail($_POST['mail']) == FALSE){
-		$error ="Individual MailAddress";
-	}
+	if(Is_Mail($_POST['mail']) == FALSE) die( "<br>Individual MailAddress");
 	//パスワードチェック
-	else if($_POST['password'] != $_POST['password_r']){
-		$error = "Password is not mach";
-	}
+	if($_POST['password'] != $_POST['password_r']) die( "<br>Password is not mach");
 	//住所チェック
-	else if(Geo($_POST['address']) == NULL){
-		$error = "Individual Address";
-	}
-	else{
+	if(Geo($_POST['address']) == NULL) die( "<br>Individual Address");
 	
 	$_SESSION['Address'] 	= 	$_POST['address']; 
 	$_SESSION['Mail'] 		= 	$_POST['mail']; 
@@ -106,65 +139,4 @@ if (isset($_POST["send"])) {
 		
 	header("Location: ./SignupCheck.php");	
 	echo "</center>";
-	}
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
-	<link rel="stylesheet"type="text/css"href="register.css">
-	<title>Reciplan</title>
-
-</head>
- 	<body>
-		<!--ヘッダ-->
-		<div class="header">
-			<a href="/top/top.html"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
-        </div>
-
-	
-
-	<body>
-    <center>
-	<div class="table">
-      <form method="post" action="">
-      <table cellspacing="30">
-        <tbody>
-	<tr>
-		<th></th><th><?php echo $error?></th>
-	</tr>
-          <tr>
-            <th> User &nbsp Name</th>
-            <th> <input type="text" name="username"> </th>
-          </tr>
-          <tr>
-            <th> Password</th>
-            <th> <input type="password" name="password"> </th>
-          </tr>
-          <tr>
-            <th> Password Retype</th>
-            <th> <input type="password" name="password_r"> </th>
-          </tr>
-		  <tr>
-            <th> Mail </th>
-            <th> <input type="text" name="mail"> </th>
-          </tr>
-          <tr>
-            <th> Adress</th>
-            <th> <input type="text" name="address"> </th>
-          </tr>
-	
-          
-		</tbody>
-		</table>
-		<div class="button">
-            <th colspan=2> <input class="button_1"type="submit" name="send" value="send"> </th>
-		</div>
-      </form>
-    </center>
-  </body>
-</html>
-
-

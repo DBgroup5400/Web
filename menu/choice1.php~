@@ -100,7 +100,7 @@ $errorMessage = "";
     		}
 		while ($row = $result->fetch_assoc()) {
 			// 予算の取り出し
-			$yosan = $row['Max_Pricw'];
+			$yosan = $row['Max_pricw'];
 		}
 		// データベースの切断
 		$mysqli->close();

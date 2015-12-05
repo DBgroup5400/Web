@@ -37,7 +37,6 @@ if (isset($_POST["login"])) {
 
     // クエリの実行
     $query = "SELECT * FROM Users WHERE Mail = '" . $mail . "'";
-    $userid = "SELECT ID FROM Users WHERE Mail = '" . $mail . "'";
     $result = $mysqli->query($query);
     if (!$result) {
       print('クエリーが失敗しました。' . $mysqli->error);
@@ -48,6 +47,7 @@ if (isset($_POST["login"])) {
     while ($row = $result->fetch_assoc()) {
       // パスワード(暗号化済み）の取り出し
       $db_hashed_pwd = $row['Psssword'];
+	$userid = $row['ID'];
     }
 
     // データベースの切断

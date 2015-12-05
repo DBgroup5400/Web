@@ -1,41 +1,13 @@
 body{
 	background-color:#E2E2E2;
 }
-.margin{
-	height:300px;
-}
-.Day2{
-    position:absolute;
-    top:140px;
-    left:820px;
-    width:4050px;
-    font-size:18pt;
-    color:#595959;
-}
-.item{
-    position:absolute;
-    top:160px;
-    left:200px;
-    height:480px;
-    font-size:18pt;
-    color:#595959;
-}
-
-.like{
+.suki{
 	position:absolute;
-	top:130px;
-	left:400px;
+	top:150px;
+	left:390px;
 	font-size:17pt;
 	color:#595959;
 }
-.dislike{
-    position:absolute;
-    top:130px;
-    left:910px;
-    font-size:17pt;
-    color:#595959;
-}
-
 input{
     width:430px;
     height:60px;
@@ -64,33 +36,11 @@ input{
     font-size:16pt;
     color:#595959;
 }
-.kadomaru{
-	width:520px;
-	height:100px;
-	background-color:#FFFFFF;
-	border:0px solid;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-
-}
-.kadomaru2{
-	width:520px;
-	height:100px;
-	background-color:#F2F2F2;
-	border:0px solid;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-
-}
-
-
 
 input.box1{
 	position:absolute;
-	top:180px;
-	left:310px;
+	top:290px;
+	left:300px;
 
     width:350px;
     height:80px;
@@ -103,92 +53,8 @@ input.box1{
 }
 input.box2{
 	position:absolute;
-	top:280px;
-	left:310px;
-
-    width:350px;
-    height:80px;
-    font-size:18pt;
-    color:#595959;
-    border:0px solid;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-}
-input.box3{
-    position:absolute;
-    top:380px;
-    left:310px;
-
-    width:350px;
-    height:80px;
-    font-size:18pt;
-    color:#595959;
-    border:0px solid;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-}
-input.box4{
-    position:absolute;
-    top:480px;
-    left:310px;
-
-    width:350px;
-    height:80px;
-    font-size:18pt;
-    color:#595959;
-    border:0px solid;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-}
-input.box5{
-    #F8B184;position:absolute;
-    top:180px;
-    left:810px;
-
-    width:350px;
-    height:80px;
-    font-size:18pt;
-    color:#595959;
-    border:0px solid;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-}
-input.box6{
-    position:absolute;
-    top:280px;
-    left:810px;
-
-    width:350px;
-    height:80px;
-    font-size:18pt;
-    color:#595959;
-    border:0px solid;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-}
-input.box7{
-    position:absolute;
-    top:380px;
-    left:810px;
-
-    width:350px;
-    height:80px;
-    font-size:18pt;
-    color:#595959;
-    border:0px solid;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-}
-input.box8{
-    position:absolute;
-    top:480px;
-    left:810px;
+	top:290px;
+	left:800px;
 
     width:350px;
     height:80px;
@@ -204,7 +70,7 @@ input.box8{
 	position:absolute;
 	top:0px;
 	left:0px;
-	height:140%;
+	height:100%;
 	width:195px;
 	background-color:#F8B184;
 }
@@ -213,42 +79,15 @@ input.box8{
     position:absolute;
     top:0px;
     left:0px;
-    width:240%;
+    width:100%;
     background-color:#F8B184;
 }
 
-.choiced{
-    position:absolute;
-    top:880px;
-    left:360px;
-    width:100px;
-    font-size:18pt;
-    color:#595959;
-}
-
-.menu_table3{
-    position:absolute;
-    top:200px;
-    left:1690px;
-    width:100px;
-    font-size:18pt;
-    color:#595959;
-}
-.menu_table4{
-    position:absolute;
-    top:200px;
-    left:2350px;
-    width:100px;
-    font-size:18pt;
-    color:#595959;
-}
-
-
-.menu_table{
+.table{
 	position:absolute;
-	top:200px;
-	left:310px;
-	width:100px;
+	top:140px;
+	left:25%;
+	width:800px;
 	font-size:18pt;
 	color:#595959;
 }
@@ -264,56 +103,6 @@ input.box8{
 	top:350px;
 	left:15%;
 }
-input.button_10{
-    position:absolute;
-    background-color:#FC9E63;
-    color:#FFFFFF;
-    top:1020px;
-    width:200px;
-    border:none;
-
-    left:370px;
-
-    font-size:18pt;
-    -moz-border-radius:10px 10px 10px 10px;
-    -webkit-border-radius:10px 10px 10px 10px;
-    border-radius:10px 10px 10px 10px;
-
-}
-
-input.button_11{
-    position:absolute;
-    background-color:#FC9E63;
-    color:#FFFFFF;
-    top:1020px;
-    width:200px;
-    border:none;
-
-    left:650px;
-
-    font-size:18pt;
-    -moz-border-radius:10px 10px 10px 10px;
-    border-radius:10px 10px 10px 10px;
-
-}
-
-
-input.button_9{
-    position:absolute;
-    background-color:#FC9E63;
-    color:#FFFFFF;
-    top:140px;
-    width:300px;
-    border:none;
-
-    left:250px;
-
-    font-size:18pt;
-    -moz-border-radius:10px 10px 10px 10px;
-    -webkit-border-radius:10px 10px 10px 10px;
-    border-radius:10px 10px 10px 10px;
-
-}
 
 
 
@@ -323,7 +112,9 @@ input.button_1{
     color:#FFFFFF;
 	top:33px;
     width:200px;
-    border:none;
+    border:2px;
+    border-style:solid solid none solid;
+
 
 	left:590px;
 
@@ -335,9 +126,7 @@ input.button_1{
 }
 input.button_2{
     position:absolute;
-      border:2px;
-    border-style:solid solid none solid;
-
+    border-style:none;
     background-color:#FC9E63;
     color:#FFFFFF;
     top:33px;
@@ -369,9 +158,8 @@ input.button_3{
 }
 input.button_4{
     position:absolute;
-      border:2px;
-    border-style:solid none solid solid;
-
+ 	    border:none;
+   
 
     background-color:#FC9E63;
     color:#FFFFFF;
@@ -388,7 +176,7 @@ input.button_4{
 }
 input.button_5{
     position:absolute;
-	border:none;
+    border-style:none;
     background-color:#FC9E63;
     color:#FFFFFF;
     top:250px;
@@ -436,9 +224,11 @@ input.button_7{
 }
 input.button_8{
     position:absolute;
-r:#FFFFFF;
+	        border:2px;
+    border-style:solid none solid solid;
 
-    border-style:none;
+
+    
     background-color:#FC9E63;
     color:#FFFFFF;
     top:550px;
@@ -458,7 +248,7 @@ input.button_submit{
     border-style:none;
     background-color:#FC9E63;
     color:#FFFFFF;
-    top:600px;
+    top:340px;
     width:180px;
 
     left:650px;
@@ -469,4 +259,19 @@ input.button_submit{
     border-radius:10px 10px 10px 10px;
 }
 
+input.delete{
+    position:absolute;
+    border-style:none;
+    background-color:#FC9E63;
+    color:#FFFFFF;
+    top:570px;;
+    width:180px;
+
+    left:1070px;
+
+    font-size:18pt;
+    -moz-border-radius:10px 10px 10px 10px;
+    -webkit-border-radius:10px 10px 10px 10px;
+    border-radius:10px 10px 10px 10px;
+}
 

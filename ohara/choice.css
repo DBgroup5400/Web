@@ -7,8 +7,8 @@ body{
 .Day2{
     position:absolute;
     top:140px;
-    left:820px;
-    width:4050px;
+    left:595px;
+    width:2050px;
     font-size:18pt;
     color:#595959;
 }
@@ -65,7 +65,7 @@ input{
     color:#595959;
 }
 .kadomaru{
-	width:520px;
+	width:300px;
 	height:100px;
 	background-color:#FFFFFF;
 	border:0px solid;
@@ -74,11 +74,12 @@ input{
     border-radius:10px;
 
 }
-.kadomaru2{
-	width:520px;
-	height:100px;
-	background-color:#F2F2F2;
-	border:0px solid;
+.kadomaru_2{
+    width:300px;
+    height:60px;
+	color:#FFFFFF;
+    background-color:#FC9E63;
+    border:0px solid;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
     border-radius:10px;
@@ -204,7 +205,7 @@ input.box8{
 	position:absolute;
 	top:0px;
 	left:0px;
-	height:140%;
+	height:100%;
 	width:195px;
 	background-color:#F8B184;
 }
@@ -213,14 +214,14 @@ input.box8{
     position:absolute;
     top:0px;
     left:0px;
-    width:240%;
+    width:220%;
     background-color:#F8B184;
 }
 
-.choiced{
+.menu_table2{
     position:absolute;
-    top:880px;
-    left:360px;
+    top:200px;
+    left:1000px;
     width:100px;
     font-size:18pt;
     color:#595959;
@@ -268,11 +269,11 @@ input.button_10{
     position:absolute;
     background-color:#FC9E63;
     color:#FFFFFF;
-    top:1020px;
+    top:900px;
     width:200px;
     border:none;
 
-    left:370px;
+    left:250px;
 
     font-size:18pt;
     -moz-border-radius:10px 10px 10px 10px;
@@ -285,14 +286,15 @@ input.button_11{
     position:absolute;
     background-color:#FC9E63;
     color:#FFFFFF;
-    top:1020px;
+    top:900px;
     width:200px;
     border:none;
 
-    left:650px;
+    left:500px;
 
     font-size:18pt;
     -moz-border-radius:10px 10px 10px 10px;
+    -webkit-border-radius:10px 10px 10px 10px;
     border-radius:10px 10px 10px 10px;
 
 }
@@ -303,7 +305,7 @@ input.button_9{
     background-color:#FC9E63;
     color:#FFFFFF;
     top:140px;
-    width:300px;
+    width:200px;
     border:none;
 
     left:250px;
