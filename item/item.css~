@@ -212,7 +212,7 @@ input.box8{
 	position:absolute;
 	top:0px;
 	left:0px;
-	height:170%;
+	height:100%;
 	width:195px;
 	background-color:#F8B184;
 }

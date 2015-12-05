@@ -121,7 +121,7 @@
 
   		$data = mysql_fetch_assoc( $result );
  		$user_id = intval( $data["max(ID)"]) + 1;
-		//printf("\n\ndata = %d\n\n",$user_id);
+		printf("\n\ndata = %d\n\n",$user_id);
 
 		
 		$query = sprintf("INSERT INTO  Users.Users VALUES('%06d','%s','%s','%s','%s','%s' )",$user_id, $Passwd,$Mail,	$Name,	$Address,$Date);
@@ -156,43 +156,4 @@
 
 ?>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
-	<link rel="stylesheet"type="text/css"href="register.css">
-	<title>Reciplan</title>
-
-</head>
- 	<body>
-		<!--ヘッダ-->
-		<div class="header">
-			<a href="/top/top.html"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
-        </div>
-
-		
-		<!--ヘッダ終わり-->
-
-		<div class="table">
-		登録が完了しました
-		<table cellspacing="30">
-		<tr>
-			<td>ユーザID</td><td><?php echo $Name?></td>
-		</tr>
-		<tr>
-			<td>メールアドレス</td><td><?php echo $Mail?></td>
-		</tr>
-		<tr>
-			<td>市区町村</td><td><?php echo $Adress?></td>
-		</tr>
-		</table>
-		
-			<div class="button">
-			<a href="/top/top.html"><input class="button_1"type="submit"name="register"value="topへ戻る"onclick="document.charset='UTF-8'"></a>
-			</div>
-		</div>
-
-	</body>
-</html>
 

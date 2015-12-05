@@ -148,7 +148,50 @@ EOF;
    			die( "Close Failed.".mysql_error() );
 
 	}
+/***********************************
+  住所情報文字列をGPS情報に変換
+  引数
+   $Adress 住所平文
+  
+  返り値
+   $x
+   $y
+   $e_ID
+***********************************/
 
+ function Geo($Address){
+
+   $Address = urlencode($Address);
+   $x = 0; 
+   $y = 0;
+   $City_ID = NULL;
+
+   $url = sprintf("http://maps.google.com/maps/api/geocode/json?address=%s&language=ja&sensor=false",$Address);
+//   print($url."<br/>");
+   
+   $json = file_get_contents($url);
+   //print($json);
+   $arr = json_decode($json,false);
+  
+   if ($arr === NULL ) {
+    print("non data</br>");
+        return NULL;//?データがない時の処理?
+   }else{
+         //?存在しているときの処理?
+//    print("data is enable<br/>");
+    //var_dump($arr);
+    $neko = count($arr->results[0]->address_components);
+    $x =  $arr->results[0]->geometry->location->lat;
+    $y =  $arr->results[0]->geometry->location->lng;
+    $City_ID = $arr->results[0]->address_components[$neko - 4 ]->long_name;
+   }
+   if($x == NULL||$y == NULL||$City_ID == NULL){
+    return NULL;
+   }
+
+ //  print("x is ".$x." y is ".$y."city is ".$City_ID." <br/>");
+   return array($x,$y,$City_ID);
+ }
 
 /************************************************
 	ユーザをユーザーデータベースに格納するための関数

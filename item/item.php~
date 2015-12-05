@@ -102,8 +102,8 @@ if (!isset($_SESSION["USERID"])) {
 						<td>
 						<?php
 							//価格入力が終わったらコメントアウト外す
-							$zid = $tmp->GetIDfromFoodstuffName($stuff[($i-1)]["Name"]);
-							$price = $tmp->GetFoodstuffPrice( $_SESSION["USERID"], $zid );
+							//$zid = $tmp->GetIDfromFoodstuffName($stuff[($i-1)]["Name"]);
+							//$price = $tmp->GetFoodstuffPrice( $_SESSION["USERID"], $zid );
 						?>
 						<input class="kadomaru"type="button" value="<?= $price//$stuff[($i-1)]["Unit"] ?>">
 						</td><td></td>

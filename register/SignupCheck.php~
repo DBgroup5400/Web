@@ -186,7 +186,7 @@ EOF;
 		printf("\n\ndata = %d\n\n",$user_id);
 
 		
-		$query = sprintf("INSERT INTO  Users.Users VALUES('%06d','%s','%s','%s','%s','%s' '0')",$user_id, $Passwd,$Mail,	$Name,	$Address,$Date);
+		$query = sprintf("INSERT INTO  Users.Users VALUES('%06d','%s','%s','%s','%s','0','%s')",$user_id, $Passwd,$Mail,	$Name,	$Address,$Date);
 
 		printf("\n%s\n",$query);
  		$result = mysql_query( $query );
