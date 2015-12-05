@@ -1,8 +1,9 @@
 <?php
-// require_once "food0.1.php"
 require_once "libdb.php";
+require_once "libcity.php";
 
 class Foodstuff extends db{
+  private $_city;
   /* protected propaties */
   protected $_bigcategory;
   protected $_middlecategory;
@@ -14,6 +15,7 @@ class Foodstuff extends db{
 
     $this->_bigcategory = array();
     $this->_middlecategory = array();
+    $this->_city = new City( $__host, $__user, $__passwd );
 
     parent::__construct( $__host, $__user, $__passwd );
     // get category name
@@ -137,20 +139,43 @@ class Foodstuff extends db{
   }
   /* method that get price of foodstuff */
   public function GetFoodstuffPrice( $_UserID, $_FoodstuffID ){
-    $query = "SELECT Foodstuff_ID, Price, Amount, max(Day) from U".$_UserID." where Foodstuff_ID = '".$_FoodstuffID."';";
+    $record = NULL;
+    $query = "SELECT Price, Mount from U".$_UserID." where ID = '".$_FoodstuffID."' Order by Day DESC;";
 
-    $result = _db_throw_query( "U".$_UserID, $query );
-    $record = mysqli_fetch_assoc( $result );
+    $result = $this->_db_throw_query( "Users_Geo", $query );
+    if( $result != NULL ){
+      $record = mysqli_fetch_assoc( $result );
+      while( mysqli_next_result( $this->_connection ) ){
+        mysqli_store_result( $this->_connection );
+      }
+    }
     if( $record != NULL ){
-      $price = $record["Price"] / $record["Amount"];
+      $price = $record["Price"] / $record["Mount"];
     } else{
-      // $list = $_FoodstuffID;
-      // SerchPrice( 2.0, $_UserID, $list );
-      // $price = $list;
+      $list = array( 0 => $_FoodstuffID, );
+      $list = $this->_city->SerchPrice( 2.0, $_UserID, $list );
+      $price = $list;
+    }
+    
+    return $price;
+  }
+  /***************************************************
+    $User_ID    ユーザーID
+    $Foodstuff_ID 食材ID
+    $Price      食材価格
+    $Amount     食材料
+    $Date       購入日時 NULLなら登録時
+  ***************************************************/
+  public function RegPrice($User_ID,$Foodstuff_ID,$Price,$Amount,$Date){
+    if($Date == NULL )
+      // $Date = date('Y-m-t H:i:s');
+      $Date = date('Y-m-t');
+    $query = sprintf( "insert into U%06s VALUES('%s','%s','%s','%s')", $User_ID, $Foodstuff_ID, $Price, $Amount, $Date );
+    $result = $this->_db_throw_query( "Users_Geo", $query );
+    if( !$result ){
+      print( "Quely Failed.\n".mysqli_error( $this->_connection ) );
       return NULL;
     }
-
-    return array( 0 => $price, 1 => $record["Unit"] );
   }
   /* end of public methods */
 
