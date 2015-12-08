@@ -158,7 +158,7 @@ class hoge{/*
 		return true;
 	}
 
-	function GET_MONEY($yosan){
+	function GET_MONEY($yosan, $kind){
 		//料理IDから値段を取得
 		$obj= new hoge;
 
@@ -175,16 +175,31 @@ class hoge{/*
 		$count = 0;
 		$ten_miss = 0;
 
+		switch ($kind):
+			case 1:
+				$Recipe_kind = "0100";
+			break;
+			case 2:
+				$Recipe_kind = "1000";
+			break;
+			case 3:
+				$Recipe_kind = "0010";
+			break;
+			case 4:
+				$Recipe_kind = "0001";
+			break;
+		endswitch;
+
 		while($count < 10 && $ten_miss < 10){
 		// while($count < 10){
 
 			// 料理名(dish)を取得
-			$recipe_info = $tmp->GetMenuList( 0, 0, 0, "0100" );
+			$recipe_info = $tmp->GetMenuList( 0, 0, 0, $Recipe_kind);
 			$index = rand(0,count($recipe_info));
 			// var_dump($recipe[$index]["Name"]);
 			$recipi_name = $recipe_info[$index]["Name"];
 			// $recipi_name = $obj->GET_NAME(0);
-			var_dump($recipi_name);
+			// var_dump($recipi_name);
 			//料理ID取得
 			$id = $obj->toID($recipi_name);
 			// print_r($id);

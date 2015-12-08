@@ -81,10 +81,64 @@ header("Content-Type:text/html;charset=UTF-8");
 		// $array = $_GET['sunday'];
 		// var_dump($array);
 
-		$Week[7][4];
-		$Sunday = $_GET['Sunday'];
-		$Week[0] = explode( '|', $Sunday);
+		require_once "../liblog/liblog.php";
+
+		$logWeek = array(
+		  'Mon' => array(
+		      'main' => '001',
+		      'dish' => '函館',
+		      'sub' => 'yamada@example.com',
+		  ),
+		  'Tue' => array(
+		      'main' => '001',
+		      'dish' => '函館',
+		      'sub' => 'yamada@example.com',
+		  ),
+		  'Wed' => array(
+		      'main' => '001',
+		      'dish' => '函館',
+		      'sub' => 'yamada@example.com',
+		  ),
+		  'Thu' => array(
+		      'main' => '001',
+		      'dish' => '函館',
+		      'sub' => 'yamada@example.com',
+		  ),
+		  'Fri' => array(
+		      'main' => '001',
+		      'dish' => '函館',
+		      'sub' => 'yamada@example.com',
+		  ),
+		  'Sat' => array(
+		      'main' => '001',
+		      'dish' => '函館',
+		      'sub' => 'yamada@example.com',
+		  ),
+		 	'Sun' => array(
+		      'main' => '001',
+		      'dish' => '函館',
+		      'sub' => 'yamada@example.com',
+		  )
+		);
+
+		$log = new MenuLog( "localhost", "root", "", $_SESSION["USERID"]);
+		$decision = $log->ResistMenuLog($_SESSION["USERID"], $logWeek);
+		$menulog  = $log->GetMenuLog($_SESSION["USERID"]);
+
 		var_dump($_SESSION["USERID"]);
+
+		$Week[7][4];
+
+		$Sunday = $_GET['Sunday'];
+		$tmp = explode( '|', $Sunday);
+		$subArray = explode( ';', $tmp[2]);
+		unset($tmp[2]);
+		array_merge($tmp);
+		unset($subArray[0]);
+		array_merge($subArray);
+		$Week[0] = array_merge($tmp, $subArray);
+		// var_dump($Week[0]);
+
 		// $Monday = $_GET['Monday'];
 		// $Week[1] = explode( '|', $Monday);
 		// $Tuesday = $_GET['Thesday'];
@@ -105,7 +159,6 @@ header("Content-Type:text/html;charset=UTF-8");
 		// var_dump($Week[1][1]);
 
 		$hoge=$NameArray;
-		$money="300";
 		?>
 
 		<?php for($i = 1; $i <= 10; $i++): ?>
@@ -117,12 +170,12 @@ header("Content-Type:text/html;charset=UTF-8");
 				case 3:case 4:
 				?>
 				<?php
-					$hoge = $Week[($j-1)][$i];
+					$hoge = $Week[($j-1)][$i-1];
 					$url = "./../item/item.php?recipe=".urlencode($hoge);
 				?>
 					<td>
 					<a href= <?= $url ?> style='text-decoration:none;'>
-					<input class='kadomaru' type='button' value='<?= $hoge.$money ?>'>
+					<input class='kadomaru' type='button' value='<?= $hoge?>'>
 					<!-- <input type='hidden' name='recipe' value='$NameArray[$i]]'> -->
 					</a>
 					</td>

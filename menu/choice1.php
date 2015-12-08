@@ -61,7 +61,28 @@ $errorMessage = "";
 
 	<!--ヘッダとサイドおわり-->
 	<!--ページごとに週を送る→-日付を得る→日付ごとのメニューを表示→-それぞれのボタンにメニューIDを→遷移先にメニューID送る→IDをもとに材料表示-->
-	
+
+<?php
+function printButton( $yosan, $yen, $i, $food, $table_number){
+	if($yosan >= $yen){
+		if($i % 2 == 1 && $table_number != 0){ //choicedテーブル以外
+			 echo "<tr>";
+		}
+		echo "<td><input type='hidden' name='hidden[$i]' value='$yen'>";
+		if($table_number != 0)
+			 echo "<input class='kadomaru' type='submit' name='submit[$i]' value='$food $yen 円'>";
+		else
+			echo "<input class='kadomaru2' type='submit' name='submit[$i]' value='$food $yen'>";
+		echo "<input type='hidden' name='food[$i]' value='$food'>";
+		echo "</td>";
+	}
+	else{
+		echo $i % 2 == 1 ? '<tr>' : '';
+		echo'<td><input class="kadomaru"type="button"value='.'></a></td>';
+	}
+}
+?>
+
 <?php
 	$money=0;
 	$button=0;
@@ -69,15 +90,46 @@ $errorMessage = "";
 	for($i = 0; $i <=10; $i++)
 		$flag[$i] = 0;
 
+	//			DISH             MAIN
+	// ガーリックトースト｜チキンソテー｜味噌汁;サンマの味噌に
 	if(isset($_POST['submit'])){
 		$button=key($_POST['submit']);
 		$flag[$button] = 1;
 		$money=$_POST['hidden'][$button];
 		$name=$_POST['food'][$button];
 		$yosan=$_POST['kane'];
-		$nametotal = $_POST['recipe']."|".$name;
-	}
-	else{
+		// $nametotal = $_POST['recipe']."|".$name;
+		$DAY = $_POST['day_recipe'];
+		switch($_POST['kind']):
+		case "1":
+			$DISH = $_POST['food'][$button];
+			$MAIN = $DAY[1];
+			$SUBtotal = $DAY[2];
+			$nametotal = $DISH."|".$DAY[1]."|".$DAY[2];
+			break;
+		case '2':
+			$MAIN = $_POST['food'][$button];
+			$DISH = $DAY[0];
+			$SUBtotal = $DAY[2];
+			$nametotal = $DAY[0]."|".$MAIN."|".$DAY[2];
+			break;
+		case '3':
+			$SUB = $_POST['food'][$button];
+			$SUBtotal = $DAY[2].";".$name;
+			$DISH = $DAY[0];
+			$MAIN = $DAY[1];
+			$nametotal = $DAY[0]."|".$DAY[1]."|".$SUBtotal;
+			break;
+		default:
+			$DISH = "ERROR!";
+			break;
+		endswitch;
+		// $SUBtotal = $SUB.";".$name;
+
+
+		// $nametotal = $DISH."|".$MAIN."|".$SUBtotal;
+
+	}else{
 		// mysqlへの接続
   		$mysqli = new mysqli($db['host'], $db['user'], $db['pass']);
 		if ($mysqli->connect_errno) {
@@ -97,149 +149,135 @@ $errorMessage = "";
 			print('クエリーが失敗しました。' . $mysqli->error);
 			$mysqli->close();
 			exit();
-    		}
-		while ($row = $result->fetch_assoc()) {
-			// 予算の取り出し
+    	}
+
+    	// 予算の取り出し
+		while ($row = $result->fetch_assoc())
 			$yosan = $row['Max_Pricw'];
-		}
 		// データベースの切断
 		$mysqli->close();
-
 	}
+?>
 
-		// $yen = 1;
+
+<?php
 		$yosan = $yosan - $money;
 
-		// var_dump($money);
-		//挿入部
-
 		/*
-			現状ランダムな金額を挿入していきている．
-			また，今のままだとページリセットがかかるごとに，データベースもしくはデータが更新されてしまうため，トランザクションが多いかも？
-			そもそも出力する献立は，1000円以下なら1000円以下の料理しか表示しないようにしたい．(選択して消えた部分に対して更にデータ挿入．)
+		現状ランダムな金額を挿入していきている．
+		また，今のままだとページリセットがかかるごとに，データベースもしくはデータが更新されてしまうため，トランザクションが多いかも？
+		そもそも出力する献立は，1000円以下なら1000円以下の料理しか表示しないようにしたい．(選択して消えた部分に対して更にデータ挿入．)
 		 */
 
-		require('ramdom.php');
+		require_once "ramdom.php";
+
 		$source = array();
+		$obj= new hoge;
 
 		$kind = 1; // 1:dish, 2:main, 3:sub, 4:soup
-		$obj= new hoge;
-		// $food = $obj->GET_DATA($kind);
-		// $food = $obj->GET_NAME($kind);
-		// print_r($food);
+		$recipe = $obj->GET_MONEY($yosan, $kind);
 
-		$recipe = $obj->GET_MONEY($yosan);
-		// var_dump($recipe);
+		$sunday = $_GET['message'];
 
-		// $yen = array();
-		// $food_id = array();              //料理名を格納した配列データ
-		// foreach ($food as $key => $value) {
-			// $yen[$key] = $obj->GET_MONEY($value);
-			// printf("%s回目\n", $value);
-		// }
-
-		for($i = 0; $i <= 10; $i++ ){
-			$subfood[$i] = "サラダ";
-			$subyen[$i] = 4;
-		}
-
-
-		echo'<div class="menu_table">';
-		echo' <table cellpadding="10">';
+		echo'<div class="menu_table"><table cellpadding="10">';
 		echo'<form method="post"action="">';
-
-		function printButton( $yosan, $yen, $i, $food, $table_number){
-			if($yosan >= $yen){
-				if($i % 2 == 1 && $table_number != 0){ //choicedテーブル以外
-					 echo "<tr>";
-				}
-				echo "<td><input type='hidden' name='hidden[$i]' value='$yen'>";
-				if($table_number != 0)
-					 echo "<input class='kadomaru' type='submit' name='submit[$i]' value='$food $yen 円'>";
-				else
-					echo "<input class='kadomaru2' type='submit' name='submit[$i]' value='$food $yen'>";
-				echo "<input type='hidden' name='food[$i]' value='$food'>";
-				echo "</td>";
-			}
-			else{
-				echo $i % 2 == 1 ? '<tr>' : '';
-				echo'<td><input class="kadomaru"type="button"value='.'></a></td>';
-			}
-		}
-
+		// var_dump($name);
 		$i = 1;
 		foreach ($recipe as $key => $value) {
 			printButton($yosan, $value, $i, $key,1);
 			$i++;
 		}
-
-		// if(isset($_POST['message'])){
-			// var_dump(1);
-		// }
-		// var_dump($_GET['message']);
-		$sunday = $_GET['message'];
-
-		// var_dump(explode('|',$sunday));
-
-		// $aaa = explode( '|', $nametotal);
+		// var_dump($DISH);
 		// var_dump($nametotal);
-		// var_dump($aaa);
-
+		// var_dump($DAY[0]);
+		// var_dump($DAY[1]);
 		echo'<input type="hidden"name="kane"value="'.$yosan.'">';
 		echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
-		echo'</form></table></div>';
+		// echo'<input type="hidden"name="recipe"value="'.$DISH.'">';
+		echo'<input type="hidden"name="kind"value="1">';
+		?>
+		<input type="hidden" name="day_recipe[]" value=<?= $DISH ?>>
+		<input type="hidden" name="day_recipe[]" value=<?= $MAIN ?>>
+		<input type="hidden" name="day_recipe[]" value=<?= $SUBtotal ?>>
+		<?php
+		echo'</form></table>';
+		echo'</div>';
 
+		// -----------------------------------------------------------
 
+		echo'<div class="menu_table3"><table cellpadding="10">';
+		echo'<form method="post"action="">';
+		$i = 1;
 
+		$kind = 2; // 1:dish, 2:main, 3:sub, 4:soup
+		$recipe = $obj->GET_MONEY($yosan, $kind);
+
+		foreach ($recipe as $key => $value) {
+			printButton($yosan, $value, $i, $key,1);
+			$i++;
+		}
+		echo'<input type="hidden"name="kane"value="'.$yosan.'">';
+		echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
+		echo'<input type="hidden"name="kind"value="2">';
+		?>
+		<input type="hidden" name="day_recipe[]" value=<?php echo $DISH ?>>
+		<input type="hidden" name="day_recipe[]" value=<?php echo $MAIN ?>>
+		<input type="hidden" name="day_recipe[]" value=<?php echo $SUBtotal ?>>
+		<?php
+		echo'</form></table>';
+		echo'</div>';
+
+		// -----------------------------------------------------------
+		echo'<div class="menu_table4"><table cellpadding="10">';
+		echo'<form method="post"action="">';
+		$i = 1;
+
+		$kind = 3; // 1:dish, 2:main, 3:sub, 4:soup
+		$recipe = $obj->GET_MONEY($yosan, $kind);
+
+		foreach ($recipe as $key => $value) {
+			printButton($yosan, $value, $i, $key,1);
+			$i++;
+		}
+		echo'<input type="hidden"name="kane"value="'.$yosan.'">';
+		echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
+		echo'<input type="hidden"name="kind"value="3">';
+		?>
+		<input type="hidden" name="day_recipe[]" value=<?php echo $DISH ?>>
+		<input type="hidden" name="day_recipe[]" value=<?php echo $MAIN ?>>
+		<input type="hidden" name="day_recipe[]" value=<?php echo $SUBtotal ?>>
+		<?php
+		echo'</form></table>';
+		echo'</div>';
+
+		// -----------------------------------------------------------
 
 		echo'<div class="choiced">';
 		echo'<table cellpadding="10">';
 		echo'<form method="post"action="">';
 
 		$NameArray = explode( '|', $nametotal);
-		// var_dump(count($NameArray)-1);
-		// var_dump($aaa);
-		for($i = 1; $i < count($NameArray); $i++ ){
+		// var_dump($NameArray[2]);
+		$tmp = $NameArray[2];
+		unset($NameArray[2]);
+		// var_dump($NameArray);
+		// var_dump($tmp);
+		$array_tmp = explode( ';', $tmp);
+		unset($array_tmp[0]);
+		array_merge($array_tmp);
+
+		// var_dump($array_tmp);
+		$NameArray = array_merge($NameArray, $array_tmp);
+		// $NameArray = $NameArray + $array_tmp;
+		// var_dump($NameArray);
+		for($i = 0; $i < count($NameArray) && count($NameArray) != 1; $i++ )
 			printButton($yosan, $NameArray[$i], $i, $food,0);
-		}
-
-
-		// echo'<input type="hidden"name="kane"value="'.$yosan.'">';
-		// echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
 
 		echo'</form>';
 		echo'</form></table></div>';
+		// -----------------------------------------------------------
 
-		/*
-		echo'<div class="menu_table3">';
-		echo' <table cellpadding="10">';
-		echo'<form method="post"action="">';
-
-		for($i = 1; $i <= 10; $i++ ){
-			printButton($yosan, $yen[$i], $i, $food);
-		}
-
-
-		echo'<input type="hidden"name="kane"value="'.$yosan.'">';
-
-		echo'</form></table></div>';
-
-		echo'<div class="menu_table4">';
-		echo'<table cellpadding="10">';
-		echo'<form method="post"action="">';
-
-		for($i = 1; $i <= 10; $i++ ){
-			printButton($yosan, $yen[$i], $i, $food);
-		}
-
-
-		// echo'<input type="hidden"name="kane"value="'.$yosan.'">';
-		// echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
-
-		echo'</form>';
-		echo'</form></table></div>';
-	*/
-		?>
+	?>
 
 	</table>
 
@@ -264,7 +302,7 @@ $errorMessage = "";
 	<?php
 	//sunday
 	echo'<input class="button_9"type="button"value='.'残予算'.''.$yosan.''.'円'.'>';
-	echo'<form action="choice.php"method="get">';
+	echo'<form action="./choice1.php"method="get">';
 	echo'<input class="button_10"type="submit"value="やりなおし">';
 	echo "</form>";
 
@@ -277,6 +315,7 @@ $errorMessage = "";
 	$i = 1;
 	?>
 
+	<input type="hidden" name="sunday[]" value=<?php echo "111"?>>
 	<input type="hidden" name="sunday[]" value=<?php echo $array[1]?>>
 	<input type="hidden" name="sunday[]" value=<?php echo $array[2]?>>
 	<input type="hidden" name="sunday[]" value=<?php echo $array[3]?>>
