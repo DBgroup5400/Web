@@ -22,8 +22,7 @@ $_SESSION = array();
   header("Location: ../top/top.html");
 }
 ?>
-<!--決定時 2
-	選択時 10 --!>
+
 
 <?php
 header("Content-Type:text/html;charset=UTF-8");
@@ -34,6 +33,67 @@ header("Content-Type:text/html;charset=UTF-8");
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
 	<link rel="stylesheet"type="text/css"href="menu.css">
 	<title>Reciplan</title>
+	<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script>
+    $(document).ready(function()
+    {
+
+        /**
+         * 送信ボタンクリック
+         */
+        $('#send').click(function()
+        {
+            //POSTメソッドで送るデータを定義します var data = {パラメータ名 : 値};
+            // var request = {request : $('#request').val()};
+
+            var recipeMon = {recipeMon : $('#recipeMon').val()};
+            var recipeTue = {recipeTue : $('#recipeTue').val()};
+            var recipeWed = {recipeWed : $('#recipeWed').val()};
+            var recipeThu = {recipeThu : $('#recipeThu').val()};
+            var recipeFri = {recipeFri : $('#recipeFri').val()};
+            var recipeSat = {recipeSat : $('#recipeSat').val()};
+            var recipeSun = {recipeSun : $('#recipeSun').val()};
+            var id = {id : $('#id').val()};
+
+            /**
+             * Ajax通信メソッド
+             * @param type  : HTTP通信の種類
+             * @param url   : リクエスト送信先のURL
+             * @param data  : サーバに送信する値
+             */
+            $.ajax({
+                type: "POST",
+                url: "log_reg.php",
+                data: {
+                    // request: request,
+                    id: id,
+                    recipeMon: recipeMon,
+										recipeTue: recipeTue,
+										recipeWed: recipeWed,
+										recipeThu: recipeThu,
+										recipeFri: recipeFri,
+										recipeSat: recipeSat,
+										recipeSun: recipeSun,
+                },
+                /**
+                 * Ajax通信が成功した場合に呼び出されるメソッド
+                 */
+                success: function(data, dataType)
+                {
+                    alert(data);
+                    window.location.href = './menulog.php';
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown)                {
+                    //エラーメッセージの表示
+                    alert('Error : ' + errorThrown);
+                }
+            });
+
+            //サブミット後、ページをリロードしないようにする
+            return false;
+        });
+    });
+    </script>
 
 </head>
  	<body>
@@ -69,92 +129,82 @@ header("Content-Type:text/html;charset=UTF-8");
 		if(isset($_GET['text']))
 			$nametotal = $_GET['recipe'];
 
-		//hairetu tosite data uketoru
+		// hairetu tosite data uketoru
 		// $array = $_GET['sunday'];
 		// var_dump($array);
 
-		require_once "../liblog/liblog.php";
+		require_once "liblog.php";
+		require_once "libnow.php";
 
-		/*$logWeek = array(
-		  'Mon' => array(
-		      'main' => '001',
-		      'dish' => '函館',
-		      'sub' => 'yamada@example.com',
-		  ),
-		  'Tue' => array(
-		      'main' => '001',
-		      'dish' => '函館',
-		      'sub' => 'yamada@example.com',
-		  ),
-		  'Wed' => array(
-		      'main' => '001',
-		      'dish' => '函館',
-		      'sub' => 'yamada@example.com',
-		  ),
-		  'Thu' => array(
-		      'main' => '001',
-		      'dish' => '函館',
-		      'sub' => 'yamada@example.com',
-		  ),
-		  'Fri' => array(
-		      'main' => '001',
-		      'dish' => '函館',
-		      'sub' => 'yamada@example.com',
-		  ),
-		  'Sat' => array(
-		      'main' => '001',
-		      'dish' => '函館',
-		      'sub' => 'yamada@example.com',
-		  ),
-		 	'Sun' => array(
-		      'main' => '001',
-		      'dish' => '函館',
-		      'sub' => 'yamada@example.com',
-		  )
-		);*/
+		$logWeek = array(
+		  'Mon' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Tue' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Wed' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Thu' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Fri' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Sat' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Sun' => array('main' => '','dish' => '', 'sub' => ''),
+		);
 
-		$log = new MenuLog( "localhost", "root", "", $_SESSION["USERID"]);
-		//$decision = $log->ResistMenuLog($_SESSION["USERID"], $logWeek);
-		$menulog  = $log->GetMenuLog($_SESSION["USERID"]);
 
-		//var_dump($_SESSION["USERID"]);
+
+		// $nowWeek = array(
+		//   'Mon' => array('main' => '','dish' => '', 'sub' => ''),
+		//   'Tue' => array('main' => '','dish' => '', 'sub' => ''),
+		//   'Wed' => array('main' => '','dish' => '', 'sub' => ''),
+		//   'Thu' => array('main' => '','dish' => '', 'sub' => ''),
+		//   'Fri' => array('main' => '','dish' => '', 'sub' => ''),
+		//   'Sat' => array('main' => '','dish' => '', 'sub' => ''),
+		//   'Sun' => array('main' => '','dish' => '', 'sub' => ''),
+		// );
+
+		// $log = new MenuLog( "localhost", "root", "", $_SESSION["USERID"]);
+		// $decision = $log->ResistMenuLog($_SESSION["USERID"], $logWeek);
+		// $menulog  = $log->GetMenuLog($_SESSION["USERID"]);
+
+		// $now = new MenuLog( "localhost", "root", "", $_SESSION["USERID"]);
+		// $decision = $now->ResistMenuLog($_SESSION["USERID"], $nowWeek);
+		// $nowlog  = $now->GetMenuLog($_SESSION["USERID"]);
+
+		$now = new MenuNow( "localhost", "root", "",  $_SESSION["USERID"]);
+		$nowlog  = $now->GetMenuLog($_SESSION["USERID"]);
+
+		// var_dump($nowlog);
 
 		$Week[7][4];
 
-		$Sunday = $_GET['Sunday'];
+/*		$Sunday = $_GET['Sunday'];
 		$tmp = explode( '|', $Sunday);
 		$subArray = explode( ';', $tmp[2]);
 		unset($tmp[2]);
 		array_merge($tmp);
 		unset($subArray[0]);
 		array_merge($subArray);
-		$Week[0] = array_merge($tmp, $subArray);
-		// var_dump($Week[0]);
+		$Week[0] = array_merge($tmp, $subArray);*/
 
-		// $Monday = $_GET['Monday'];
-		// $Week[1] = explode( '|', $Monday);
-		// $Tuesday = $_GET['Thesday'];
-		// $Week[2] = explode( '|', $Thesday);
-		// $Wednesday = $_GET['Wednesday'];
-		// $Week[3] = explode( '|', $Wednesday);
-		// $Thursday = $_GET['Thursday'];
-		// $Week[4] = explode( '|', $thursday);
-		// $Friday = $_GET['Friday'];
-		// $Week[5] = explode( '|', $Friday);
-		// $Saturday = $_GET['Saturday'];
-		// $Week[6] = explode( '|', $Saturday);
+		$kind = array("Sun", "Mon","Tue", "Wed", "Thu", "Fri", "Sat");
+		// var_dump($kind);
+		foreach ($kind as $key => $value) {
+			$subArray = explode( ';', $nowlog[$value]["sub"]);
+			$Week[$key][0] =  $nowlog[$value]["dish"];
+			$Week[$key][1] =  $nowlog[$value]["main"];
+			$Week[$key][2] =  $subArray[1];
+			$Week[$key][3] =  $subArray[2];
+		}
 
 		$NameArray = explode( '|', $nametotal);
 
 		// var_dump($nametotal);
 		// var_dump($NameArray);
-		// var_dump($Week[1][1]);
+		// var_dump($Week);
 
 		$hoge=$NameArray;
+
+		$now = new MenuNow( "localhost", "root", "", $_SESSION["USERID"]);
+
 		?>
 
 		<?php for($i = 1; $i <= 11; $i++): ?>
-
 		<tr>
 			<?php for($j = 1; $j <= 7; $j++): ?>
 				<?php switch($i):
@@ -175,14 +225,14 @@ header("Content-Type:text/html;charset=UTF-8");
 				<?php	break; ?>
 
 				<?php
-				case 5:break; 
+				case 5:break;
 				case 6:break;
 				case 7:break;
 				case 8:
-					
+
 					echo'<td><input class="kadomaru_22" type="button" value="0 円"></td>';
 					break;
-				
+
 				case 9:
 					if($j == 1)
 						echo"<tr><td><input class='kadomaru_22' type='button' value='0 円'>";
@@ -191,35 +241,53 @@ header("Content-Type:text/html;charset=UTF-8");
 				?>
 				<?php
 
-				$url = "./choice1.php?message=".urlencode($Sunday) ?>
-				
-					
+				// $url = "./choice1.php?message=".urlencode($Sunday);
+				$url = "./choice1.php?message=".$j;
+				?>
+
+
 				<td>
 						<a href=<?= $url ?> style='text-decoration:none;'>
 						<form name="aaa" action="./choice1.php" method="get" >
 							<input class='kadomaru_2' type='button' value='メニューの変更'>
-							<input type='hidden' name='message' value='aaa'>
+							<!-- <input type='hidden' name='message' value='aaa'> -->
+							<!-- <input type='hidden' name='kind' value='<?= $j ?>'> -->
 						</form>
 						</a>
 				</td>
 				<?php break; ?>
-								
+
 				<?php
 				case 11;
-					
-					if($j == 1)
-					echo "<tr><td><input class='kadomaru_2'type='button'value='決定'></td>"?>
-					
+
+					if($j == 1):
+					foreach ($kind as $key => $value)
+						$recipe[$key] = $nowlog[$value]["dish"]."|".$nowlog[$value]["main"]."|".$nowlog[$value]["sub"];
+					 ?>
+				  <input id="recipeMon" value='<?= $recipe[1] ?>' type="hidden" />
+				  <input id="recipeTue" value='<?= $recipe[2] ?>' type="hidden" />
+				  <input id="recipeWed" value='<?= $recipe[3] ?>' type="hidden" />
+				  <input id="recipeThu" value='<?= $recipe[4] ?>' type="hidden" />
+				  <input id="recipeFri" value='<?= $recipe[5] ?>' type="hidden" />
+				  <input id="recipeSat" value='<?= $recipe[6] ?>' type="hidden" />
+				  <input id="recipeSun" value='<?= $recipe[0] ?>' type="hidden" />
+
+				  <input id="id" value='<?= $_SESSION["USERID"] ?>' type="hidden" />
+					<tr><td><input input class='kadomaru_2' id="send" value="保存" type="submit" /></td>
+
+					<?php endif; ?>
+
+
 				<?php
 					break;
 
 				default:
 					echo "erorr!!<\br>";
 				?>
-				
+
 				<?php endswitch; ?>
 			<?php endfor; ?>
-			
+
 		<?php endfor; ?>
 
 		</table>

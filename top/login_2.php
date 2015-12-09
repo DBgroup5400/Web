@@ -59,7 +59,7 @@ if (isset($_POST["login"])) {
       // ４．認証成功なら、セッションIDを新規に発行する
       session_regenerate_id(true);
       $_SESSION["USERID"] = $userid;
-      header("Location: /top/main.php");
+      header("Location: ../top/main.php");
       exit;
     } 
     else {

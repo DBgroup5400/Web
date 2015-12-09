@@ -83,7 +83,7 @@ if (isset($_POST["login"])) {
  	<body>
 		<!--ヘッダ-->
 		<div class="header">		
-		<a href="top.html"><img src = "../Reciprice.png"width="350.7"height="92.4"></a>
+		<a href="top.html"><img src = "../Reciplan.png"width="350.7"height="92.4"></a>
 		</div>
 		<!--ヘッダ終わり-->
 		

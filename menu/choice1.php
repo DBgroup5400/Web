@@ -26,6 +26,58 @@ $errorMessage = "";
 	<link rel="stylesheet"type="text/css"href="choice.css">
 	<title>Reciplan</title>
 
+	 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script>
+    $(document).ready(function()
+    {
+
+        /**
+         * 送信ボタンクリック
+         */
+        $('#send').click(function()
+        {
+            //POSTメソッドで送るデータを定義します var data = {パラメータ名 : 値};
+            // var request = {request : $('#request').val()};
+
+            var recipe = {recipe : $('#recipe').val()};
+            var kind = {kind : $('#kind').val()};
+            // var id = {id : $('#id').val()};
+            var name = {name : $('#name').val()};
+
+            /**
+             * Ajax通信メソッド
+             * @param type  : HTTP通信の種類
+             * @param url   : リクエスト送信先のURL
+             * @param data  : サーバに送信する値
+             */
+            $.ajax({
+                type: "POST",
+                url: "nowlog_reg.php",
+                data: {
+                    // request: request,
+                    name: name,
+                    kind: kind,
+                    recipe: recipe
+                },
+                /**
+                 * Ajax通信が成功した場合に呼び出されるメソッド
+                 */
+                success: function(data, dataType)
+                {
+                    alert(data);
+                    window.location.href = './menu.php';
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown)                {
+                    //エラーメッセージの表示
+                    alert('Error : ' + errorThrown);
+                }
+            });
+
+            //サブミット後、ページをリロードしないようにする
+            return false;
+        });
+    });
+    </script>
 </head>
 <body>
 	<!--ヘッダとサイド-->
@@ -155,6 +207,20 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 		 */
 
 		require_once "ramdom.php";
+		require_once "liblog.php";
+		require_once "libnow.php";
+
+
+		$nowWeek = array(
+		  'Mon' => array('main' => 'aaa','dish' => 'aaa', 'sub' => 'aa'),
+		  'Tue' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Wed' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Thu' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Fri' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Sat' => array('main' => '','dish' => '', 'sub' => ''),
+		  'Sun' => array('main' => '','dish' => '', 'sub' => ''),
+		);
+
 
 		$source = array();
 		$obj= new hoge;
@@ -173,9 +239,11 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 			$i++;
 		}
 		// var_dump($DISH);
-		// var_dump($nametotal);
+
+		// var_dump($_GET['message']);
+		// var_dump($_GET['kind']);
 		// var_dump($DAY[0]);
-		// var_dump($DAY[1]);
+		// var_dump($nowWeek);
 		echo'<input type="hidden"name="kane"value="'.$yosan.'">';
 		echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
 		// echo'<input type="hidden"name="recipe"value="'.$DISH.'">';
@@ -291,20 +359,62 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 	echo'<input class="button_10"type="submit"value="やりなおし">';
 	echo "</form>";
 
-	echo'<form action="menu.php" method="get">';
-	echo'<input class="button_11"type="submit" name=text value=確定>';
+	// echo'<form action="menu.php" method="get">';
+	// var_dump($nametotal);
+	// var_dump($sunday);
+	?>
+	<form method="post">
+
+	<!-- // echo'<input class="button_11"type="submit" name=text value=確定 >'; -->
+	<?php
+		switch ($_GET['message']):
+			case '1':
+				$kind = "Sun";
+				break;
+			case "2":
+				$kind = "Mon";
+				break;
+			case "3":
+				$kind = "Tue";
+				break;
+			case "4":
+				$kind = "Wed";
+				break;
+			case "5":
+				$kind = "Thu";
+				break;
+			case "6":
+				$kind = "Fri";
+				break;
+			case "7":
+				$kind = "Sat";
+				break;
+			default:
+				$kind = "ERROR!";
+				break;
+		endswitch;
+		// var_dump($kind);
+	?>
+
+  <input id="recipe" value='<?= $nametotal ?>' type="hidden" />
+  <input id="kind" value=<?= $kind ?> type="hidden" />
+  <input id="name" value=<?= $_SESSION["USERID"] ?> type="hidden" />
+	<input class="button_11" id="send" value="確定" type="submit" />
+
+	<!--
 	if((count($NameArray)-1) != 0)
 		$array = explode( '|', $nametotal);
 	else
 		$array = explode( '|', $sunday);
-	$i = 1;
-	?>
 
-	<input type="hidden" name="sunday[]" value=<?php echo "111"?>>
+	$i = 1;
+
+	?> -->
+
+	<input type="hidden" name="sunday[]" value=<?php echo $array[0]?>>
 	<input type="hidden" name="sunday[]" value=<?php echo $array[1]?>>
 	<input type="hidden" name="sunday[]" value=<?php echo $array[2]?>>
 	<input type="hidden" name="sunday[]" value=<?php echo $array[3]?>>
-	<input type="hidden" name="sunday[]" value=<?php echo $array[4]?>>
 
 	<?php
 	if((count($NameArray)-1) != 0)

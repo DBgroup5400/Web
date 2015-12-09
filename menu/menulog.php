@@ -60,7 +60,7 @@ header("Content-Type:text/html;charset=UTF-8");
         <a href="menu2.php">
         <input class="button_5"type="button"value="履歴表示">
         </a>
-      
+
 
 		<!--ヘッダとサイドおわり-->
  		<!--ページごとに週を送る→-日付を得る→日付ごとのメニューを表示→-それぞれのボタンにメニューIDを→遷移先にメニューID送る→IDをもとに材料表示-->
@@ -68,45 +68,45 @@ header("Content-Type:text/html;charset=UTF-8");
     	<table cellpadding="10">
 
 		<?php
-		
+
 			//$query = "SELECT * from UM".$_uid.";";
 			//$result = $this->_db_throw_query( "Users_Geo", $query );
 			$log = new MenuLog('localhost', 'root','', $_SESSION["USERID"] );
 			/*$list = array(
   'Mon' => array(
-      'main' => '月曜main', 
-      'dish' => '月曜dish', 
+      'main' => '月曜main',
+      'dish' => '月曜dish',
       'sub' =>  '月曜sub',
   ),
   'Tue' => array(
-      'main' => '火曜main', 
-      'dish' => '火曜dish', 
+      'main' => '火曜main',
+      'dish' => '火曜dish',
       'sub' =>  '火曜sub1|火曜sub2',
   ),
  'Wed' => array(
-      'main' => '水曜main', 
-      'dish' => '水曜dish', 
+      'main' => '水曜main',
+      'dish' => '水曜dish',
       'sub' =>  '水曜sub1|水曜sub2',
   ),
  'Thu' => array(
-      'main' => '木曜main', 
-      'dish' => '木曜dish', 
+      'main' => '木曜main',
+      'dish' => '木曜dish',
       'sub' =>  '木曜sub1|木曜sub2',
   ),
  'Fri' => array(
-      'main' => '金曜main', 
-      'dish' => '金曜dish', 
+      'main' => '金曜main',
+      'dish' => '金曜dish',
       'sub' =>  '金曜sub1|金曜sub2',
   ),
  'Sat' => array(
-      'main' => '土曜main', 
-      'dish' => '土曜dish', 
+      'main' => '土曜main',
+      'dish' => '土曜dish',
       'sub' =>  '土曜sub1|土曜sub2',
 
   ),
  'Sun' => array(
-      'main' => '日曜main', 
-      'dish' => '日曜dish', 
+      'main' => '日曜main',
+      'dish' => '日曜dish',
       'sub' =>  '日曜sub1|日曜sub2',
   ),
 );*/
@@ -159,7 +159,7 @@ header("Content-Type:text/html;charset=UTF-8");
 						//土曜
 							$menu_name = $menulog["Sat"]["main"];
 							echo "<td><input class='kadomaru' type='button' value='".$menu_name."'></td></tr>";
-							break;	
+							break;
 						default:
 					endswitch;
 					break;
@@ -202,7 +202,7 @@ header("Content-Type:text/html;charset=UTF-8");
 						//土曜
 							$menu_name = $menulog["Sat"]["dish"];
 							echo "<td><input class='kadomaru' type='button' value='".$menu_name."'></td></tr>";
-							break;	
+							break;
 						default:
 					endswitch;
 					break;
