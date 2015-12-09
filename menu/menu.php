@@ -174,9 +174,12 @@ header("Content-Type:text/html;charset=UTF-8");
 				<?php	break; ?>
 
 				<?php
-				case 5: case 6:
-				case 7: case 8:
-					echo'<td></td>';
+				case 5:break; 
+				case 6:break;
+				case 7:break;
+				case 8:
+					
+					echo'<td><input class="kadomaru_2" type="button" value="0 円"></td>';
 					break;
 				case 9:
 				?>

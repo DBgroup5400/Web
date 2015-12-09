@@ -66,7 +66,6 @@ $_SESSION = array();
  		
 		
         <form method="post"action=""accept-charset="UTF-8">
-		<input class="delete"type="submit"name="delete"value="ユーザを削除">
         <input class="button_submit"type="submit"name="logout"value="ログアウト">
 		</form>	
 	</body>
