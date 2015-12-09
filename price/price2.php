@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+// ログイン状態のチェック
+if (!isset($_SESSION["USERID"])) {
+  header("Location: /top/login_2.php");
+  exit;
+}
+
+
 header("Content-Type:text/html;charset=UTF-8");
 ?>
 <?php
@@ -34,7 +43,7 @@ header("Content-Type:text/html;charset=UTF-8");
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
 	<link rel="stylesheet"type="text/css"href="price2.css">
-	<title>Reciprice</title>
+	<title>Reciplan</title>
 
 </head>
  	<body>

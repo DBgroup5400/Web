@@ -179,7 +179,7 @@ header("Content-Type:text/html;charset=UTF-8");
 				case 7:break;
 				case 8:
 					
-					echo'<td><input class="kadomaru_2" type="button" value="ここに金額 円"></td>';
+					echo'<td><input class="kadomaru_2" type="button" value="0 円"></td>';
 					break;
 				case 9:
 				?>

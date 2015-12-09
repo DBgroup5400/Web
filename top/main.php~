@@ -1,16 +1,3 @@
-<?php
-session_start();
-if(
-$_SESSION['Password']==""||
-!$_SESSION['Name']){
-print"ログインされてません。";
-exit();
-}else{
-}
-
-
-
-?>
 <!DOCTYPE html>
 <html>
 <head>

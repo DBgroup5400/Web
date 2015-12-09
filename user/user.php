@@ -55,7 +55,7 @@ if (isset($_POST["price"])) {
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
 	<link rel="stylesheet"type="text/css"href="user.css">
-	<title>Reciprice</title>
+	<title>Reciplan</title>
 
 </head>
  	<body>

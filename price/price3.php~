@@ -4,7 +4,7 @@ header("Content-Type:text/html;charset=UTF-8");
 <?php
 	function lister($data){
 		$foodlist = 0;
-		$link = mysql_connect('localhost','Reciplan','reciplan');
+		$link = mysql_connect('localhost','root','');
 		if(!$link){
 			die("connection faild".mysql_error());
 		}

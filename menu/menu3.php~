@@ -5,8 +5,8 @@ header("Content-Type:text/html;charset=UTF-8");
 <html>
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
-	<link rel="stylesheet"type="text/css"href="menu5.css">
-	<title>Reciplan</title>
+	<link rel="stylesheet"type="text/css"href="menu3.css">
+	<title>Reciprice</title>
 
 </head>
  	<body>
@@ -14,7 +14,7 @@ header("Content-Type:text/html;charset=UTF-8");
 		<div class="side">
 		</div>
 		<div class="header">		
-		<a href="main.php"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
+		<a href="/top/main.php"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
 		</div>
 		<a href="/user/user.php">
 		<input class="button_1"type="button"value="ユーザ管理">

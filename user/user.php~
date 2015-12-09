@@ -77,18 +77,10 @@ if (isset($_POST["price"])) {
 		<a href="user.php">
         <input class="button_4"type="button"value="食費">
         </a>
-        <a href="user2.php">
-        <input class="button_5"type="button"value="好き嫌い">
+        <a href="user5.php">
+        <input class="button_5"type="button"value="ログアウト">
         </a>
-        <a href="user3.php">
-        <input class="button_6"type="button"value="優先事項">
-        </a>
-		<a href="user4.php">
-        <input class="button_7"type="button"value="価格入力">
-        </a>
-		<a href="user5.php">
-        <input class="button_8"type="button"value="ログアウト">
-        </a>
+
 		
 		<!--ヘッダとサイドおわり-->
  		
