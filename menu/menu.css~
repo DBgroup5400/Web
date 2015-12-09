@@ -12,7 +12,7 @@ body{
     font-size:18pt;
     color:#595959;
 }
-.item{
+.week_price{
     position:absolute;
     top:160px;
     left:200px;
@@ -20,7 +20,13 @@ body{
     font-size:18pt;
     color:#595959;
 }
-
+.like{
+	position:absolute;
+	top:130px;
+	left:400px;
+	font-size:17pt;
+	color:#595959;
+}
 .like{
 	position:absolute;
 	top:130px;
@@ -86,7 +92,17 @@ input{
 
 }
 
+.kadomaru_22{
+    width:300px;
+    height:60px;
+	color:#FFFFFF;
+    background-color:#BBBBBB;
+    border:0px solid;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
 
+}
 
 input.box1{
 	position:absolute;
@@ -293,8 +309,8 @@ input.button_3{
 }
 input.button_4{
     position:absolute;
-      border:none;
-
+      border:2px;
+    border-style:solid none solid solid;
 
 
     background-color:#FC9E63;
@@ -312,8 +328,7 @@ input.button_4{
 }
 input.button_5{
     position:absolute;
-	border:2px;
-    border-style:solid none solid solid;
+	border:none;
     background-color:#FC9E63;
     color:#FFFFFF;
     top:250px;

@@ -61,6 +61,7 @@ header("Content-Type:text/html;charset=UTF-8");
 
 		<!--ヘッダとサイドおわり-->
  		<!--ページごとに週を送る→-日付を得る→日付ごとのメニューを表示→-それぞれのボタンにメニューIDを→遷移先にメニューID送る→IDをもとに材料表示-->
+
 		<div class="menu_table">
     	<table cellpadding="10">
 
@@ -152,7 +153,7 @@ header("Content-Type:text/html;charset=UTF-8");
 		$hoge=$NameArray;
 		?>
 
-		<?php for($i = 1; $i <= 10; $i++): ?>
+		<?php for($i = 1; $i <= 11; $i++): ?>
 
 		<tr>
 			<?php for($j = 1; $j <= 7; $j++): ?>
@@ -179,11 +180,20 @@ header("Content-Type:text/html;charset=UTF-8");
 				case 7:break;
 				case 8:
 					
-					echo'<td><input class="kadomaru_2" type="button" value="0 円"></td>';
+					echo'<td><input class="kadomaru_22" type="button" value="0 円"></td>';
 					break;
+				
 				case 9:
+					if($j == 1)
+						echo"<tr><td><input class='kadomaru_22' type='button' value='0 円'>";
+					break;
+				case 10:
 				?>
-				<?php $url = "./choice1.php?message=".urlencode($Sunday) ?>
+				<?php
+
+				$url = "./choice1.php?message=".urlencode($Sunday) ?>
+				
+					
 				<td>
 						<a href=<?= $url ?> style='text-decoration:none;'>
 						<form name="aaa" action="./choice1.php" method="get" >
@@ -192,19 +202,24 @@ header("Content-Type:text/html;charset=UTF-8");
 						</form>
 						</a>
 				</td>
+				<?php break; ?>
+								
 				<?php
-					break;
-				case 10:
+				case 11;
+					
 					if($j == 1)
-						echo"<td><input class='kadomaru_2'type='button'value='決定'></td>";
+					echo "<tr><td><input class='kadomaru_2'type='button'value='決定'></td>"?>
+					
+				<?php
 					break;
 
 				default:
 					echo "erorr!!<\br>";
 				?>
+				
 				<?php endswitch; ?>
 			<?php endfor; ?>
-			</tr>
+			
 		<?php endfor; ?>
 
 		</table>

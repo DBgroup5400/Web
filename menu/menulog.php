@@ -43,7 +43,7 @@ header("Content-Type:text/html;charset=UTF-8");
 		<div class="side">
 		</div>
 		<div class="header">
-		<a href="../top/main.php"><img src = "../Reciprice.png"width="350.7"height="92.4"></a>
+		<a href="../top/main.php"><img src = "../Reciplan.png"width="350.7"height="92.4"></a>
 		</div>
 		<a href="../user/user.php">
 		<input class="button_1"type="button"value="ユーザ管理">

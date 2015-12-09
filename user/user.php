@@ -59,6 +59,7 @@ if (isset($_POST["price"])) {
 
     // データベースの切断
     $mysqli->close();
+    header("Location: ../menu/menu.php");
 }
 
 ?>
