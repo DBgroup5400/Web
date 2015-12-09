@@ -68,7 +68,7 @@ class MenuLog extends db{
     $return = array();
     $query = "SELECT * from UM".$_uid.";";
     $result = $this->_db_throw_query( "Users_Geo", $query );
-    if( !$result ){
+    if( $result ){
       print( "Quely Failed.\n".mysqli_error( $this->_connection ) );
       return NULL;
     }

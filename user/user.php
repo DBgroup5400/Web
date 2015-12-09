@@ -95,7 +95,7 @@ if (isset($_POST["price"])) {
 		
         <form method="post"action=""accept-charset="UTF-8">
 		<div class=price_input>
-		万円
+		円
 		</div>
         <input class="box1"type="text"name="price"pattern="^[0-9]+$"maxlength="6"required>
         <input class="button_submit"type="submit"name="register"value="変更を保存">

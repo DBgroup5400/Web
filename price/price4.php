@@ -1,6 +1,35 @@
 <?php
 header("Content-Type:text/html;charset=UTF-8");
 ?>
+<?php
+	function lister($data){
+		$foodlist = 0;
+		$link = mysql_connect('localhost','root','');
+		if(!$link){
+			die("connection faild".mysql_error());
+		}
+		//print("connection suceed</br>");
+		/*insert data into private data*/	
+		$db_selected = mysql_select_db('Foodstuff',$link);
+
+		if(!$db_selected){
+			die("select faild".mysql_error());		
+		}	
+		mysql_query('SET NAMES utf8',$link);
+		$query = sprintf("SELECT * FROM Foodstuff.Foodstuff_List WHERE Foodstuff_ID LIKE '%s%%'",$data);
+		//echo $query;
+		$result  = mysql_query($query);
+		while( ($data = mysql_fetch_array($result)) != 0){
+			printf("<option value=\"%s\"> %s</option>\n",$data['Foodstuff_ID'], $data['Foodstuff_Name']);
+		
+			$Foodlist = array( $data['Foodstuff_Name'], $data['Foodstuff_ID']);
+		}
+
+		mysql_close($link);
+		return $Foodlist;
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,8 +77,9 @@ header("Content-Type:text/html;charset=UTF-8");
 			<p>卵:
 			<select name="1"class="sel"required>
 			<option value=""></option>
-			<option value="hoge">セロリの茎</option>
-			<option value="huga">セロリの葉</option>
+			<?php
+				lister('41');
+			?>
 			</select>	
 			<input type="submit"value="予測を見る"class="Forecast">
 			</form>
@@ -60,8 +90,9 @@ header("Content-Type:text/html;charset=UTF-8");
             <p>牛乳:
             <select name="1"class="sel"required>
             <option value=""></option>
-            <option value="hoge">セロリの茎</option>
-            <option value="huga">セロリの葉</option>
+            <?php
+				lister('42');
+			?>
             </select>
             <input type="submit"value="予測を見る"class="Forecast">
             </form>
@@ -73,8 +104,9 @@ header("Content-Type:text/html;charset=UTF-8");
             <p>その他:
             <select name="1"class="sel"required>
             <option value=""></option>
-            <option value="hoge">セロリの茎</option>
-            <option value="huga">セロリの葉</option>
+            <?php
+				lister('50');
+			?>
             </select>
             <input type="submit"value="予測を見る"class="Forecast">
             </form>

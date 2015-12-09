@@ -98,7 +98,6 @@ if (isset($_POST["price"])) {
 		万円
 		</div>
         <input class="box1"type="text"name="price"pattern="^[0-9]+$"maxlength="6"required>
-		<input class="box2"type="text"name="max_price"pattern="^[0-9]+$"maxlength="6"required>
         <input class="button_submit"type="submit"name="register"value="変更を保存">
 		
 	</body>

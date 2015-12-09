@@ -72,7 +72,7 @@ header("Content-Type:text/html;charset=UTF-8");
 			//$query = "SELECT * from UM".$_uid.";";
 			//$result = $this->_db_throw_query( "Users_Geo", $query );
 			$log = new MenuLog('localhost', 'root','', $_SESSION["USERID"] );
-			/*$list = array(
+			$list = array(
   'Mon' => array(
       'main' => '月曜main', 
       'dish' => '月曜dish', 
@@ -109,8 +109,8 @@ header("Content-Type:text/html;charset=UTF-8");
       'dish' => '日曜dish', 
       'sub' =>  '日曜sub1|日曜sub2',
   ),
-);*/
-			//$decision =  $log->ResistMenuLog( $_SESSION["USERID"], $list );
+);
+			$decision =  $log->ResistMenuLog( $_SESSION["USERID"], $list );
 
 			$menulog = $log -> GetMenuLog($_SESSION["USERID"]);
 			//var_dump($menulog);

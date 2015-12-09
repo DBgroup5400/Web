@@ -4,7 +4,7 @@ header("Content-Type:text/html;charset=UTF-8");
 <?php
 	function lister($data){
 		$foodlist = 0;
-		$link = mysql_connect('localhost','root','');
+		$link = mysql_connect('localhost','Reciplan','reciplan');
 		if(!$link){
 			die("connection faild".mysql_error());
 		}
@@ -33,7 +33,7 @@ header("Content-Type:text/html;charset=UTF-8");
 <html>
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
-	<link rel="stylesheet"type="text/css"href="price.css">
+	<link rel="stylesheet"type="text/css"href="price5.css">
 	<title>Reciprice</title>
 
 </head>
@@ -73,106 +73,63 @@ header("Content-Type:text/html;charset=UTF-8");
  		<!--ページごとに週を送る→-日付を得る→日付ごとのメニューを表示→-それぞれのボタンにメニューIDを→遷移先にメニューID送る→IDをもとに材料表示-->
 		<div class="menu_table">	
         	<form method="POST"action="Forecast.php">
-			<p>根菜類:
+			<p>米:
 			<select name="1"class="sel"required>
 			<option value=""></option>
-			<?php
-				lister('11');
-			?>
+  			<?php
+				lister('51');
+			?> 			
 			</select>	
-			<input type="submit"value="予測を見る"class="Forecast" name = 'button1'>
+			<input type="submit"value="予測を見る"class="Forecast">
 			</form>
 		</div>
 		<div class="menu_table2">
 
 			<form method="POST"action="Forecast.php">
-            <p>茎葉菜類:
+            <p>麺:
             <select name="1"class="sel"required>
             <option value=""></option>
-			<?php
-				lister('12');
+            <?php
+				lister('52');
 			?>
             </select>
-            <input type="submit"value="予測を見る"class="Forecast" name = 'button2'>
+            <input type="submit"value="予測を見る"class="Forecast">
             </form>
 		
 		</div>
 		<div class="menu_table3">
 
             <form method="POST"action="Forecast.php">
-            <p>果菜類:
+            <p>パン:
             <select name="1"class="sel"required>
             <option value=""></option>
-			<?php
-				lister('13');
+   			<?php
+				lister('53');
 			?>
             </select>
-            <input type="submit"value="予測を見る"class="Forecast" name = 'button3'>
+            <input type="submit"value="予測を見る"class="Forecast">
             </form>
 
         </div>
 		<div class="menu_table4">
 
             <form method="POST"action="Forecast.php">
-            <p>海藻類:
-            <select name="1"class="sel"required>
-            <option value=""></option>
-			<?php
-				lister('14');
-			?>
-            </select>
-            <input type="submit"value="予測を見る"class="Forecast" name = 'button4'>
-            </form>
-
-        </div>
-		<div class="menu_table5">
-
-            <form method="POST"action="Forecast.php">
-            <p>菌類:
-            <select name="1"class="sel"required>
-            <option value=""></option>
-			<?php
-				lister('15');
-			?>
-            </select>
-            <input type="submit"value="予測を見る"class="Forecast" name = 'button5'>
-            </form>
-
-        </div>
-		<div class="menu_table6">
-
-            <form method="POST"action="Forecast.php">
-            <p>果物類:
-            <select name="1"class="sel"required>
-            <option value=""></option>
-			<?php
-				lister('16');
-			?>
-            </select>
-            <input type="submit"value="予測を見る"class="Forecast" name = 'button6'>
-            </form>
-
-        </div>
-		<div class="menu_table7">
-
-            <form method="POST"action="Forecast.php">
             <p>その他:
             <select name="1"class="sel"required>
             <option value=""></option>
-			<?php
-				lister('11');
+           	<?php
+				lister('50');
 			?>
             </select>
-            <input type="submit"value="予測を見る"class="Forecast" name = 'button7'>
+            <input type="submit"value="予測を見る"class="Forecast">
             </form>
 
         </div>
-\
+		
 
 	</body>
 </html>
 
 <?php
-		
 
 ?>
