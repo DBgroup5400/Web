@@ -121,7 +121,7 @@ if (isset($_POST["send"])) {
  	<body>
 		<!--ヘッダ-->
 		<div class="header">
-			<a href="/top/top.html"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
+			<a href="../top/top.html"><img src = "../Reciplan.png"width="350.7"height="92.4"></a>
         </div>
 
 	
@@ -136,23 +136,23 @@ if (isset($_POST["send"])) {
 		<th></th><th><?php echo $error?></th>
 	</tr>
           <tr>
-            <th> User &nbsp Name</th>
+            <th>ユーザネーム</th>
             <th> <input type="text" name="username"> </th>
           </tr>
           <tr>
-            <th> Password</th>
+            <th>パスワード</th>
             <th> <input type="password" name="password"> </th>
           </tr>
           <tr>
-            <th> Password Retype</th>
+            <th>パスワード(再入力)</th>
             <th> <input type="password" name="password_r"> </th>
           </tr>
 		  <tr>
-            <th> Mail </th>
+            <th>メールアドレス</th>
             <th> <input type="text" name="mail"> </th>
           </tr>
           <tr>
-            <th> Adress</th>
+            <th>住所</th>
             <th> <input type="text" name="address"> </th>
           </tr>
 	
@@ -160,7 +160,7 @@ if (isset($_POST["send"])) {
 		</tbody>
 		</table>
 		<div class="button">
-            <th colspan=2> <input class="button_1"type="submit" name="send" value="send"> </th>
+            <th colspan=2> <input class="button_1"type="submit" name="send" value="登録"> </th>
 		</div>
       </form>
     </center>

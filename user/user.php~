@@ -4,11 +4,25 @@ session_start();
 
 // ログイン状態のチェック
 if (!isset($_SESSION["USERID"])) {
-  header("Location: /top/login_2.php");
+  header("Location: ../top/login_2.php");
   exit;
 }
 
-
+if (isset($_POST["logout"])) {
+  // セッション変数のクリア
+$_SESSION = array();
+// クッキーの破棄は不要
+//if (ini_get("session.use_cookies")) {
+//    $params = session_get_cookie_params();
+//    setcookie(session_name(), '', time() - 42000,
+//        $params["path"], $params["domain"],
+//        $params["secure"], $params["httponly"]
+//    );
+//}
+// セッションクリア
+@session_destroy();
+  header("Location: ../top/top.html");
+}
 $db['host'] = "localhost";  // DBサーバのurl
 $db['user'] = "root";
 $db['pass'] = "";
@@ -46,7 +60,7 @@ if (isset($_POST["price"])) {
     // データベースの切断
     $mysqli->close();
 }
- 
+
 ?>
 
 
@@ -55,7 +69,7 @@ if (isset($_POST["price"])) {
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
 	<link rel="stylesheet"type="text/css"href="user.css">
-	<title>Reciprice</title>
+	<title>Reciplan</title>
 
 </head>
  	<body>
@@ -63,23 +77,25 @@ if (isset($_POST["price"])) {
 		<div class="side">
 		</div>
 		<div class="header">		
-		<a href="/top/main.php"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
+		<a href="../top/main.php"><img src = "../Reciprice.png"width="350.7"height="92.4"></a>
 		</div>
 		<a href="user.php">
 		<input class="button_1"type="button"value="ユーザ管理">
 		</a>
-		<a href="/menu/menu.php">
+		<a href="../menu/menu.php">
         <input class="button_2"type="button"value="献立表示">
 		</a>
-		<a href="/price/price.php">
+		<a href="../price/price.php">
         <input class="button_3"type="button"value="価格予測">
 		</a>
 		<a href="user.php">
         <input class="button_4"type="button"value="食費">
         </a>
-        <a href="user5.php">
-        <input class="button_5"type="button"value="ログアウト">
-        </a>
+
+
+        <form method="post"action=""accept-charset="UTF-8">
+        <input class="button_5"type="submit"name="logout"value="ログアウト">
+	</form>	
 
 		
 		<!--ヘッダとサイドおわり-->

@@ -83,7 +83,7 @@ if (isset($_POST["login"])) {
  	<body>
 		<!--ヘッダ-->
 		<div class="header">		
-		<a href="top.html"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
+		<a href="top.html"><img src = "../Reciprice.png"width="350.7"height="92.4"></a>
 		</div>
 		<!--ヘッダ終わり-->
 		
@@ -91,10 +91,10 @@ if (isset($_POST["login"])) {
 		<form id="loginForm"name="loginForm"method="post"action=""accept-charset="UTF-8">
 		<table cellspacing="30">
 		<tr>
-			<td>Mail</td><td><input type="text"name="mail"maxlength="40"required></td>
+			<td>メールアドレス</td><td><input type="text"name="mail"maxlength="40"required></td>
 		</tr>
 		<tr>
-			<td>Pass Word</td><td><input type="password"name="password"pattern="^[a-zA-Z0-9]+$"maxlength="20"required></td>
+			<td>パスワード</td><td><input type="password"name="password"pattern="^[a-zA-Z0-9]+$"maxlength="20"required></td>
 		</tr>
 		<tr>
 			<?php echo $errorMessage?>

@@ -11,13 +11,13 @@
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
 	<link rel="stylesheet"type="text/css"href="register.css">
-	<title>Reciprice</title>
+	<title>Reciplan</title>
 
 </head>
 
   <body>
 <div class="header">
-<a href="/top/top.html"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
+<a href="../top/top.html"><img src = "../Reciprice.png"width="350.7"height="92.4"></a>
 </div>
 
     <div class="table">

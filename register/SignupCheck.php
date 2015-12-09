@@ -17,7 +17,7 @@
 
   <body>
 <div class="header">
-<a href="/top/top.html"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
+<a href="../top/top.html"><img src = "../Reciplan.png"width="350.7"height="92.4"></a>
 </div>
 
     <div class="table">

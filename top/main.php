@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// ログイン状態のチェック
+if (!isset($_SESSION["USERID"])) {
+  header("Location: ../top/login_2.php");
+  exit;
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,21 +21,21 @@
 		<div class="side">
 		</div>
 		<div class="header">		
-		<a href="main.php"><img src = "/Reciprice.png"width="350.7"height="92.4"></a>
+		<a href="main.php"><img src = "../Reciplan.png"width="350.7"height="92.4"></a>
 		</div>
 		
 		<!--ヘッダとサイド終わり-->
 
 		
-		<a href="/user/user.php">
+		<a href="../user/user.php">
 		<input class="button_1"type="button"value="ユーザ管理">
 		</a>
 
-		<a href="/menu/menu.php">
+		<a href="../menu/menu.php">
 		<input class="button_2"type="button"value="献立表示">
         </a>
 
-		<a href="/price/price.php">
+		<a href="../price/price.php">
 	    <input class="button_3"type="button"value="価格予測">
         </a>
 

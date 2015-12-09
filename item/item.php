@@ -6,7 +6,7 @@ session_start();
 
 // ログイン状態のチェック
 if (!isset($_SESSION["USERID"])) {
-  header("Location: /top/login_2.php");
+  header("Location: ../top/login_2.php");
   exit;
 }
 
@@ -16,7 +16,7 @@ if (!isset($_SESSION["USERID"])) {
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
 	<link rel="stylesheet"type="text/css"href="item.css">
-	<title>Reciprice</title>
+	<title>Reciplan</title>
 
 </head>
  	<body>
@@ -24,33 +24,19 @@ if (!isset($_SESSION["USERID"])) {
 		<div class="side">
 		</div>
 		<div class="header">
-		<a href="/top/main.php"><img src = "/Reciprise_title.png"width="350.7"height="92.4"></a>
+		<a href="../top/main.php"><img src = "../Reciplan.png"width="350.7"height="92.4"></a>
 		</div>
-		<a href="/user/user.php">
+		<a href="../user/user.php">
 		<input class="button_1"type="button"value="ユーザ管理">
 		</a>
-		<a href="/menu/menu.php">
+		<a href="../menu/menu.php">
         <input class="button_2"type="button"value="献立表示">
 		</a>
-		<a href="/price/price.php">
+		<a href="../price/price.php">
         <input class="button_3"type="button"value="価格予測">
 		</a>
 		<!--メニューの数はメニューIDより取得予定-->
-		<a href="item.php">
-        <input class="button_4"type="button"value="材料1">
-        </a>
-        <a href="item2.php">
-        <input class="button_5"type="button"value="材料2">
-        </a>
-        <a href="item3.php">
-        <input class="button_6"type="button"value="材料3">
-        </a>
-		<a href="item4.php">
-        <input class="button_7"type="button"value="材料4">
-        </a>
-		<a href="item5.php">
-        <input class="button_8"type="button"value="材料5">
-        </a>
+	
 
 		<!--ヘッダとサイドおわり-->
  		<!--ページごとに週を送る→-日付を得る→日付ごとのメニューを表示→-それぞれのボタンにメニューIDを→遷移先にメニューID送る→IDをもとに材料表示-->

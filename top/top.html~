@@ -8,7 +8,7 @@
 
  	<body>
 		<div class="top_image">
-		<img src = "/Reciprice.png"width="601.2"height="158.4">
+		<img src = "../Reciprice.png"width="601.2"height="158.4">
 		
 		
 		<div class="button_1">
