@@ -210,7 +210,7 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 		require_once "liblog.php";
 		require_once "libnow.php";
 
-
+		/*
 		$nowWeek = array(
 		  'Mon' => array('main' => 'aaa','dish' => 'aaa', 'sub' => 'aa'),
 		  'Tue' => array('main' => '','dish' => '', 'sub' => ''),
@@ -221,12 +221,12 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 		  'Sun' => array('main' => '','dish' => '', 'sub' => ''),
 		);
 
-
+		*/
 		$source = array();
 		$obj= new hoge;
 
 		$kind = 1; // 1:dish, 2:main, 3:sub, 4:soup
-		$recipe = $obj->GET_MONEY($yosan, $kind);
+		$recipe = $obj->GET_MONEY($_SESSION["USERID"], $yosan, $kind);
 
 		$sunday = $_GET['message'];
 
@@ -238,7 +238,7 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 			printButton($yosan, $value, $i, $key,1);
 			$i++;
 		}
-		// var_dump($DISH);
+		// var_dump($recipe);
 
 		// var_dump($_GET['message']);
 		// var_dump($_GET['kind']);
@@ -263,7 +263,7 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 		$i = 1;
 
 		$kind = 2; // 1:dish, 2:main, 3:sub, 4:soup
-		$recipe = $obj->GET_MONEY($yosan, $kind);
+		$recipe = $obj->GET_MONEY($_SESSION["USERID"], $yosan, $kind);
 
 		foreach ($recipe as $key => $value) {
 			printButton($yosan, $value, $i, $key,1);
@@ -286,7 +286,7 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 		$i = 1;
 
 		$kind = 3; // 1:dish, 2:main, 3:sub, 4:soup
-		$recipe = $obj->GET_MONEY($yosan, $kind);
+		$recipe = $obj->GET_MONEY($_SESSION["USERID"], $yosan, $kind);
 
 		foreach ($recipe as $key => $value) {
 			printButton($yosan, $value, $i, $key,1);

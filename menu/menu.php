@@ -134,8 +134,10 @@ header("Content-Type:text/html;charset=UTF-8");
 		// var_dump($array);
 
 		require_once "liblog.php";
-		require_once "libnow.php";
+    require_once "libnow.php";
+		require_once "ramdom.php";
 
+    
 		$logWeek = array(
 		  'Mon' => array('main' => '','dish' => '', 'sub' => ''),
 		  'Tue' => array('main' => '','dish' => '', 'sub' => ''),
@@ -145,7 +147,7 @@ header("Content-Type:text/html;charset=UTF-8");
 		  'Sat' => array('main' => '','dish' => '', 'sub' => ''),
 		  'Sun' => array('main' => '','dish' => '', 'sub' => ''),
 		);
-
+  
 
 
 		// $nowWeek = array(
@@ -165,10 +167,15 @@ header("Content-Type:text/html;charset=UTF-8");
 		// $now = new MenuLog( "localhost", "root", "", $_SESSION["USERID"]);
 		// $decision = $now->ResistMenuLog($_SESSION["USERID"], $nowWeek);
 		// $nowlog  = $now->GetMenuLog($_SESSION["USERID"]);
+  
+    $obj= new hoge;
 
 		$now = new MenuNow( "localhost", "root", "",  $_SESSION["USERID"]);
 		$nowlog  = $now->GetMenuLog($_SESSION["USERID"]);
 
+  //   var_dump("" == $nowlog["Mon"]["main"]);
+  //   var_dump("" == $nowlog["Sun"]["main"]);
+  //   var_dump(count($nowlog["Sun"]["main"]));
 		// var_dump($nowlog);
 
 		$Week[7][4];
@@ -229,13 +236,31 @@ header("Content-Type:text/html;charset=UTF-8");
 				case 6:break;
 				case 7:break;
 				case 8:
+        // $sum_total = array();
+        for($counter = 0; $counter < 4; $counter++){
+          if ("" == $Week[$j-1][$counter])
+            $sum_total[$j-1] += 0;
+          else {
+            $sum_total[$j-1] += $obj->totalPrice_fromMenuName($_SESSION["USERID"], $Week[($j-1)][$counter]);
+          }
+          // $sum_total = 1000;
+        }
 
-					echo'<td><input class="kadomaru_22" type="button" value="0 円"></td>';
+        ?>
+					<td><input class="kadomaru_22" type="button" value="<?= $sum_total[$j-1]?> 円"></td>
+        <?php
 					break;
 
 				case 9:
-					if($j == 1)
-						echo"<tr><td><input class='kadomaru_22' type='button' value='0 円'>";
+          $TOTAL = 0;
+          foreach ($sum_total as $key => $value) {
+            $TOTAL += $value;
+          }
+					if($j == 1):
+          ?>
+						<tr><td><input class='kadomaru_22' type='button' value='<?= $TOTAL?> 円'>
+          <?php
+          endif;
 					break;
 				case 10:
 				?>

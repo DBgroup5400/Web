@@ -88,8 +88,8 @@ if (!isset($_SESSION["USERID"])) {
 						<td>
 						<?php
 							//価格入力が終わったらコメントアウト外す
-							$zid = $tmp->GetIDfromFoodstuffName($stuff[($i-1)]["Name"]);
-							$price = $tmp->GetFoodstuffPrice($_SESSION["USERID"], $zid );
+						$zid = $tmp->GetIDfromFoodstuffName($stuff[($i-1)]["Name"]);
+						$price = $tmp->GetFoodstuffPrice($_SESSION["USERID"], $zid);
 						?>
 						<input class="kadomaru"type="button" value="<?= $price.円?>">
 						</td><td></td>
@@ -98,7 +98,7 @@ if (!isset($_SESSION["USERID"])) {
 					case 4: ?>
 						<td>
 					<?php
-        					echo '<input class="items"type="text"name="'.$i.'"pattern="^[0-9]+$"maxlength="6">';
+        		echo '<input class="items"type="text"name="'.$i.'"pattern="^[0-9]+$"maxlength="6">';
 					?>	
 						</td><td></td>
 
@@ -160,6 +160,9 @@ if (!isset($_SESSION["USERID"])) {
 		<form>
 			<div style="text-align:center">
 			<center>
+			<!-- <form action="../menu/menu.php" method="get"> -->
+				<!-- <input class="kadomaru_2"type="submit"value="前のページへ戻る"> -->
+			<!-- </form> -->
 			<p> <input class="kadomaru_2"type="button" value="前のページへ戻る" onclick="history.back()"> </p>
 			<p><input class="button_submit"type="submit"name="register"value="変更を保存"></p>
 			</center>

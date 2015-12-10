@@ -6,7 +6,9 @@
 	実装方法は, 全組み合わせを作成したあと, ランダムにそれらのフラグをつけていく.
 	*/
 
-	// $obj_hogehoge = new hogehoge;
+	// $obj = new hoge;
+	// var_dump($obj->GET_MONEY("000001", 10000, 1));
+	
 	// $buf = $obj_hogehoge->SELECT();
 
 	// print_r($buf);
@@ -106,6 +108,21 @@ class hoge{/*
 	  return $source;
 	}*/
 	//$kindによって取得するカテゴリ変更
+	function totalPrice_fromMenuName($SessionId, $MenuName){
+		require_once "../libmenu/user.php";
+		$tmp = user();
+		$MenuID = $tmp->GetIDfromMenuName($MenuName);
+		$StuffArray= $tmp->GetFoodstuffListfromID($MenuID);
+		for($i = 0; $i < count($StuffArray); $i++) {
+  		// var_dump($StuffArray[$i]["Name"]);
+ 			$StuffID = $tmp->GetIDfromFoodstuffName($StuffArray[$i]["Name"]);
+  		$price = $tmp->GetFoodstuffPrice("000001",$StuffID);
+  		// var_dump($price);
+  		$sum += $price;
+		}
+		return $sum;
+	}
+
 	function GET_NAME($kind){
 
 		$recipi_name = array();
@@ -158,7 +175,7 @@ class hoge{/*
 		return true;
 	}
 
-	function GET_MONEY($yosan, $kind){
+	function GET_MONEY($ID, $yosan, $kind){
 		//料理IDから値段を取得
 		$obj= new hoge;
 
@@ -201,6 +218,8 @@ class hoge{/*
 			// $recipi_name = $obj->GET_NAME(0);
 			// var_dump($recipi_name);
 			//料理ID取得
+		  $sum_money = $obj->totalPrice_fromMenuName($ID, $recipi_name);
+		  /*
 			$id = $obj->toID($recipi_name);
 			// print_r($id);
 
@@ -219,8 +238,9 @@ class hoge{/*
 			$sum_money = 0;
 			foreach ($material_id as $key => $id)
 				$sum_money += $obj->GET_MONEY_MATERIAL($id);
+			*/
 			// var_dump($sum_money);
-
+			
 			if($sum_money < $yosan && $obj->isUniqueArray($recipe, $recipi_name) ){
 				$recipe += array($recipi_name => $sum_money);
 				$count++;

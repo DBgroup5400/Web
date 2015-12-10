@@ -54,7 +54,7 @@ EOF;
       </table>
       
     <div class="button">
-			<a href="/top/top.html"><input class="button_1"type="submit"name="register"value="topへ戻る"onclick="document.charset='UTF-8'"></a>
+			<a href="../top/top.html"><input class="button_1"type="submit"name="register"value="topへ戻る"onclick="document.charset='UTF-8'"></a>
 			</div>
 		</div>
 
