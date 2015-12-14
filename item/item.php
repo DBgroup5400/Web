@@ -15,7 +15,7 @@ if (!isset($_SESSION["USERID"])) {
 <html>
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
-	<link rel="stylesheet"type="text/css"href="item.css">
+	<!-- <link rel="stylesheet"type="text/css"href="item.css"> -->
 	<title>Reciplan</title>
 
 </head>

@@ -127,6 +127,9 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 	for($i = 0; $i <=10; $i++)
 		$flag[$i] = 0;
 
+	$aaa = explode( ',', $_GET['message']);
+	$nametotal = $aaa[2];
+
 	//			DISH             MAIN
 	// ガーリックトースト｜チキンソテー｜味噌汁;サンマの味噌に
 	if(isset($_POST['submit'])){
@@ -159,6 +162,7 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 			break;
 		default:
 			$DISH = "ERROR!";
+			$nametotal = $DAY[0]."|".$DAY[1]."|".$DAY[2];
 			break;
 		endswitch;
 		// $SUBtotal = $SUB.";".$name;
@@ -177,9 +181,6 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 		// データベースの選択
 		$mysqli->select_db($db['dbname']);
 
-		//予算の更新
-		//$query = "update Users set Max_Pricw = ".$_POST["price"]." where ID = '" . $_SESSION["USERID"] . "'";
-
 		$query = "SELECT * FROM Users WHERE ID = '".$_SESSION["USERID"]."'";
 		$result = $mysqli->query($query);
 		if (!$result) {
@@ -188,9 +189,6 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 			exit();
     }
 
-    	// 予算の取り出し
-		// while ($row = $result->fetch_assoc())
-			// $yosan = $row['Max_Pricw'];
 		// データベースの切断
 		$mysqli->close();
 	}
@@ -203,12 +201,6 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 
 <?php
 		$yosan = $yosan - $money;
-
-		/*
-		現状ランダムな金額を挿入していきている．
-		また，今のままだとページリセットがかかるごとに，データベースもしくはデータが更新されてしまうため，トランザクションが多いかも？
-		そもそも出力する献立は，1000円以下なら1000円以下の料理しか表示しないようにしたい．(選択して消えた部分に対して更にデータ挿入．)
-		 */
 
 		require_once "ramdom.php";
 		require_once "liblog.php";
@@ -244,9 +236,9 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 		}
 		// var_dump($recipe);
 
-		// var_dump($_GET['message']);
+		// var_dump($DISH);
 		// var_dump($_GET['aaa']['yosan']);
-		// var_dump($DAY[0]);
+		// var_dump($DAY);
 		// var_dump($nowWeek);
 		echo'<input type="hidden"name="kane"value="'.$yosan.'">';
 		echo'<input type="hidden"name="recipe"value="'.$nametotal.'">';
@@ -359,8 +351,9 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 	<?php
 	//sunday
 	echo'<input class="button_9"type="button"value='.'残予算'.''.$yosan.''.'円'.'>';
-	echo'<form action="./choice1.php"method="get">';
-	echo'<input class="button_10"type="submit"value="やりなおし">';
+	echo'<form action="./choice1.php"method="get">';?>
+	<input type="hidden"name="message"value='<?= $aaa[0].",".$yosan ?>'>
+	<?php echo'<input class="button_10"type="submit"value="やりなおし">';
 	echo "</form>";
 
 	// echo'<form action="menu.php" method="get">';
