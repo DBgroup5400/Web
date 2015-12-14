@@ -168,7 +168,7 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 
 	}else{
 		// mysqlへの接続
-  		$mysqli = new mysqli($db['host'], $db['user'], $db['pass']);
+  	$mysqli = new mysqli($db['host'], $db['user'], $db['pass']);
 		if ($mysqli->connect_errno) {
 			print('<p>データベースへの接続に失敗しました。</p>' . $mysqli->connect_error);
 			exit();
@@ -186,14 +186,18 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 			print('クエリーが失敗しました。' . $mysqli->error);
 			$mysqli->close();
 			exit();
-    	}
+    }
 
     	// 予算の取り出し
-		while ($row = $result->fetch_assoc())
-			$yosan = $row['Max_Pricw'];
+		// while ($row = $result->fetch_assoc())
+			// $yosan = $row['Max_Pricw'];
 		// データベースの切断
 		$mysqli->close();
 	}
+
+	$aaa = explode( ',', $_GET['message']);
+	$yosan = intval($aaa[1]);
+
 ?>
 
 
@@ -241,7 +245,7 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 		// var_dump($recipe);
 
 		// var_dump($_GET['message']);
-		// var_dump($_GET['kind']);
+		// var_dump($_GET['aaa']['yosan']);
 		// var_dump($DAY[0]);
 		// var_dump($nowWeek);
 		echo'<input type="hidden"name="kane"value="'.$yosan.'">';
@@ -367,7 +371,8 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 
 	<!-- // echo'<input class="button_11"type="submit" name=text value=確定 >'; -->
 	<?php
-		switch ($_GET['message']):
+
+		switch ($aaa[0]):
 			case '1':
 				$kind = "Sun";
 				break;
@@ -393,7 +398,7 @@ function printButton( $yosan, $yen, $i, $food, $table_number){
 				$kind = "ERROR!";
 				break;
 		endswitch;
-		// var_dump($kind);
+		var_dump($aaa);
 	?>
 
   <input id="recipe" value='<?= $nametotal ?>' type="hidden" />

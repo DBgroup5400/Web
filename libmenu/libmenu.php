@@ -101,7 +101,6 @@ class Menu extends Foodstuff{
   public function GetFoodstuffListfromID( $_MenuID ){
     $return = array();
     $query = "SELECT * from M".$_MenuID.";";
-    //print( "aaa" );
     $result = $this->_db_throw_query( "Menu", $query );
     if( !$result ){
       print( "Quely Failed.\n".mysqli_error( $this->_connection ) );
@@ -156,7 +155,7 @@ class Menu extends Foodstuff{
     }
     while( ( $record = mysqli_fetch_assoc( $result ) ) != NULL ){
       $price = $this->GetFoodstuffPrice( $_UserID, $record["Foodstuff_ID"] );
-      $sum += ($price[0]*$record["Amount"]);
+      $sum += ($price*$record["Amount"]);
     }
 
     return $sum;

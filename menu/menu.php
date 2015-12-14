@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // ログイン状態のチェック
@@ -136,7 +137,11 @@ header("Content-Type:text/html;charset=UTF-8");
 		require_once "liblog.php";
     require_once "libnow.php";
 		require_once "ramdom.php";
-
+/*
+    require_once "../libLibrary/liblog.php";
+    require_once "../libLibrary/libnow.php";
+    require_once "./ramdom.php";
+*/
     
 		$logWeek = array(
 		  'Mon' => array('main' => '','dish' => '', 'sub' => ''),
@@ -219,8 +224,11 @@ header("Content-Type:text/html;charset=UTF-8");
 				case 3:case 4:
 				?>
 				<?php
-					$hoge = $Week[($j-1)][$i-1];
-					$url = "./../item/item.php?recipe=".urlencode($hoge);
+					if(($hoge = $Week[($j-1)][$i-1]) == "")
+            $url = "#";
+          else
+					  $url = "./../item/item.php?recipe=".urlencode($hoge);
+
 				?>
 					<td>
 					<a href= <?= $url ?> style='text-decoration:none;'>
@@ -265,18 +273,50 @@ header("Content-Type:text/html;charset=UTF-8");
 				case 10:
 				?>
 				<?php
+        $db['host'] = "localhost";  // DBサーバのurl
+        $db['user'] = "root";
+        $db['pass'] = "";
+        $db['dbname'] = "Users";
 
+        $mysqli = new mysqli($db['host'], $db['user'], $db['pass']);
+        if ($mysqli->connect_errno) {
+          print('<p>データベースへの接続に失敗しました。</p>' . $mysqli->connect_error);
+          exit();
+        }
+
+        // データベースの選択
+        $mysqli->select_db($db['dbname']);
+
+        //予算の更新
+        //$query = "update Users set Max_Pricw = ".$_POST["price"]." where ID = '" . $_SESSION["USERID"] . "'";
+
+        $query = "SELECT * FROM Users WHERE ID = '".$_SESSION["USERID"]."'";
+        $result = $mysqli->query($query);
+        if (!$result) {
+          print('クエリーが失敗しました。' . $mysqli->error);
+          $mysqli->close();
+          exit();
+       }
+
+        // 予算の取り出し
+      while ($row = $result->fetch_assoc())
+        $yosan = $row['Max_Pricw'];
+      // データベースの切断
+        $mysqli->close();
 				// $url = "./choice1.php?message=".urlencode($Sunday);
-				$url = "./choice1.php?message=".$j;
+        $yosan = $yosan - $TOTAL;
+        $url = "./choice1.php?message=".$j.",".$yosan;
+        // while ($row = $result->fetch_assoc())
+            // $yosan = $row['Max_Pricw'];
 				?>
 
 
 				<td>
 						<a href=<?= $url ?> style='text-decoration:none;'>
 						<form name="aaa" action="./choice1.php" method="get" >
-							<input class='kadomaru_2' type='button' value='メニューの変更'>
-							<!-- <input type='hidden' name='message' value='aaa'> -->
-							<!-- <input type='hidden' name='kind' value='<?= $j ?>'> -->
+              <!-- <input type='hidden' name='yosan' value='$yosan'> -->
+              <input class='kadomaru_2' type='button' value='メニューの変更'>
+              <!-- <input type="hidden"name="yosan"value=1> -->
 						</form>
 						</a>
 				</td>
