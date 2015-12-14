@@ -90,6 +90,8 @@ if (!isset($_SESSION["USERID"])) {
 							//価格入力が終わったらコメントアウト外す
 						$zid = $tmp->GetIDfromFoodstuffName($stuff[($i-1)]["Name"]);
 						$price = $tmp->GetFoodstuffPrice($_SESSION["USERID"], $zid);
+						if(intval($stuff[($i-1)]["Amount"]) != 0 )
+							$price = $price* intval($stuff[($i-1)]["Amount"]);
 						?>
 						<input class="kadomaru"type="button" value="<?= $price.円?>">
 						</td><td></td>
@@ -137,9 +139,7 @@ if (!isset($_SESSION["USERID"])) {
 		for($i = 1;$i <= 4; $i++):
 			switch($i):
 			case 1:
-				echo'<td>';
-				echo '材料名';
-				echo'</td>';
+				echo'<td>材料名</td>';
 				break;
 			case 2:
         echo'<td></td><td></td><td>量</td>';
