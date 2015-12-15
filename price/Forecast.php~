@@ -495,7 +495,7 @@ function FoodID2Name($ID){
 <head>
 	<meta http-env="Content-Type" conten="text/html;charset=UTF-8">
 	<link rel="stylesheet"type="text/css"href="Forecast.css">
-	<title>Reciplan</title>
+	<title>Reciprice</title>
 
 </head>
  	<body>
@@ -503,12 +503,12 @@ function FoodID2Name($ID){
 		<div class="side">
 		</div>
 		<div class="header">		
-		<a href="../top/main.php"><img src = "../Reciplan.png"width="350.7"height="92.4"></a>
+		<a href="/top/main.php"><img src = "../Reciplan.png"width="350.7"height="92.4"></a>
 		</div>
-		<a href="../user/user.php">
+		<a href="/user/user.php">
 		<input class="button_1"type="button"value="ユーザ管理">
 		</a>
-		<a href="../menu/menu.php">
+		<a href="/menu/menu.php">
         <input class="button_2"type="button"value="献立表示">
 		</a>
 		<a href="price.php">
@@ -547,7 +547,7 @@ function FoodID2Name($ID){
 
 			session_start();
 			$data = char(SerchTimeChart(2.0,$_SESSION["USERID"],$_POST['1']));		
-			printf("<img src=\"http://chart.apis.google.com/chart?chg=0,10,5,5&chf=bg,s,e2e2e2&chs=500x300&chd=t:%s|%s&chxt=x,y&chxr=0,0,%fE2|1,0,%fE1&cht=lxy\">",$data[0],$data[1],(float)$data[2]/100,(float)$data[3]/10);
+			printf("<img src=\"http://chart.apis.google.com/chart?chs=500x300&chd=t:%s|%s&chxt=x,y&chxr=0,0,%fE2|1,0,%fE1&cht=lxy\">",$data[0],$data[1],(float)$data[2]/100,(float)$data[3]/10);
 		?>	
 		</div>
 
