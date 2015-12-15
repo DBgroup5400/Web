@@ -1,9 +1,9 @@
 <?php
-require_once "libdb.php"
+require_once "libdb.php";
 require_once "liblog.php";
 
 class MenuNow extends MenuLog{
-  public __construct( $__host, $__user, $__passwd, $__uid ){
+  public function __construct( $__host, $__user, $__passwd, $__uid ){
     parent::__construct( $__host, $__user, $__passwd, $__uid );
     $query = "CREATE TABLE UN".$__uid." ( Menu_Name text, Kind_Name varchar(10), Date DATE );";
     $result = $this->_db_throw_query( "Users_Geo", $query );
@@ -11,7 +11,7 @@ class MenuNow extends MenuLog{
 
   /* public method */
   /* method that resist menu log to db */
-  public fuction ResistMenuLog( $_uid, $_log ){
+  public function ResistMenuLog( $_uid, $_log ){
     $query = "TRUNCATE TABLE UN".$_uid.";";
     $result = $this->_db_throw_query( "Users_Geo", $query );
 
