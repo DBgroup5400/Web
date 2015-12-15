@@ -64,7 +64,7 @@ $errorMessage = "";
                  */
                 success: function(data, dataType)
                 {
-                    alert(data);
+                    // alert(data);
                     window.location.href = './menu.php';
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown)                {

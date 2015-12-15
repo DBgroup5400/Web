@@ -65,7 +65,7 @@ require_once "ramdom.php";
            * Ajax通信が成功した場合に呼び出されるメソッド
            */
            success: function(data, dataType){
-            alert(data);
+            // alert(data);
             window.location.href = './menulog.php';
           },
           error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -96,7 +96,10 @@ require_once "ramdom.php";
     <?php
     if(isset($_GET['text']))
      $nametotal = $_GET['recipe'];
-    
+
+    $now = new MenuNow( "localhost", "root", "",  $_SESSION["USERID"]);
+    $nowlog  = $now->GetMenuLog($_SESSION["USERID"]);
+
     $db['host'] = "localhost";  // DBサーバのurl
     $db['user'] = "root";
     $db['pass'] = "";
@@ -122,8 +125,21 @@ require_once "ramdom.php";
     // $today = '2015-12-22';
     $today = date('Y-m-d');
     $logday = new DateTime($aaa);
+    // var_dump($logday);
     $target = new DateTime($today);
-    
+
+    // $result = $mysqli->query("SELECT "."Date "."FROM UM".$_SESSION["USERID"] . ";");
+    // if (!$result) {
+    //   print('クエリーが失敗しました。' . $mysqli->error);
+    //   $mysqli->close();
+    //   exit();
+    // }
+
+    // while ($row = $result->fetch_assoc())
+    //   $bbb = $row['Date'];
+
+    // $b =  $logday = new DateTime($bbb);
+
     ?>
 
     <?php
@@ -151,9 +167,6 @@ require_once "ramdom.php";
 
     $obj= new hoge;
 
-    $now = new MenuNow( "localhost", "root", "",  $_SESSION["USERID"]);
-    $nowlog  = $now->GetMenuLog($_SESSION["USERID"]);
-
     $Week[7][4];
 
 /*  $Sunday = $_GET['Sunday'];
@@ -176,7 +189,7 @@ require_once "ramdom.php";
 
     $NameArray = explode( '|', $nametotal);
 
-    var_dump($logday < $target); //true
+    // var_dump($logday < $target); //true
 
     $hoge=$NameArray;
 
@@ -241,7 +254,7 @@ require_once "ramdom.php";
         case 10:
         ?>
         <?php
-        
+
         $db['host'] = "localhost";  // DBサーバのurl
         $db['user'] = "root";
         $db['pass'] = "";
@@ -272,8 +285,9 @@ require_once "ramdom.php";
           $yosan = $row['Max_Pricw'];
       // データベースの切断
         $mysqli->close();
-        
+
         // $url = "./choice1.php?message=".urlencode($Sunday);
+        // var_dump($yosan);
         $yosan = ($yosan - $TOTAL +  $sum_total[$j-1]);
         // var_dump($yosan);
         $recipename = "";
@@ -304,9 +318,8 @@ require_once "ramdom.php";
 
         <?php
         case 11;
-
         if($j == 1):
-          if($logday < $target):
+          // if($logday < $target):
            foreach ($kind as $key => $value)
             $recipe[$key] = $nowlog[$value]["dish"]."|".$nowlog[$value]["main"]."|".$nowlog[$value]["sub"];
           ?>
@@ -321,7 +334,7 @@ require_once "ramdom.php";
           <input id="id" value='<?= $_SESSION["USERID"] ?>' type="hidden" />
           <tr><td><input input class='kadomaru_2' id="send" value="保存" type="submit" /></td>
 
-          <?php endif; ?>
+          <?php //endif; ?>
         <?php endif; ?>
 
 
