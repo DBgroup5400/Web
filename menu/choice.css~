@@ -8,7 +8,7 @@ body{
     position:absolute;
     top:140px;
     left:820px;
-    width:3520px;
+    width:3500px;
     font-size:18pt;
     color:#595959;
 }

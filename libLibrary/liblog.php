@@ -1,22 +1,38 @@
 <?php
 require_once "libdb.php";
-require_once "liblog.php";
 
-class MenuNow extends MenuLog{
+class MenuLog extends db{
+  /* protected propaties */
+  protected $kind;
+  protected $week;
+  /* end of protected propaties */
+
+  /* constructor */
   public function __construct( $__host, $__user, $__passwd, $__uid ){
-    parent::__construct( $__host, $__user, $__passwd, $__uid );
-    $query = "CREATE TABLE UN".$__uid." ( Menu_Name text, Kind_Name varchar(10), Date DATE );";
+    $this->kind = array( 0 => "main",
+                   1 => "dish",
+                   2 => "sub" );
+    $this->week = array( 0 => "Mon",
+                   1 => "Tue",
+                   2 => "Wed",
+                   3 => "Thu",
+                   4 => "Fri",
+                   5 => "Sat",
+                   6 => "Sun", );
+    parent::__construct( $__host, $__user, $__passwd );
+    $query = "CREATE TABLE UM".$__uid." ( Menu_Name text, Kind_Name varchar(10), Date DATE );";
     $result = $this->_db_throw_query( "Users_Geo", $query );
   }
+  /* end of constructor */
 
   /* public method */
   /* method that resist menu log to db */
   public function ResistMenuLog( $_uid, $_log ){
-    $query = "TRUNCATE TABLE UN".$_uid.";";
+    $query = "TRUNCATE TABLE UM".$_uid.";";
     $result = $this->_db_throw_query( "Users_Geo", $query );
 
     $query = "";
-    $tmp = "INSERT INTO UN".$_uid." VALUES ( '";
+    $tmp = "INSERT INTO UM".$_uid." VALUES ( '";
     for( $i = 0; $i < 7; $i++ ){
       for( $j = 0; $j < 3; $j++ ){
         if( $j == 2 ){
@@ -50,7 +66,7 @@ class MenuNow extends MenuLog{
     $back_date = NULL;
     $back_kind = NULL;
     $return = array();
-    $query = "SELECT * from UN".$_uid.";";
+    $query = "SELECT * from UM".$_uid.";";
 
     $result = $this->_db_throw_query( "Users_Geo", $query );
     if( !$result ){

@@ -11,7 +11,7 @@ class MenuNow extends MenuLog{
 
   /* public method */
   /* method that resist menu log to db */
-  public function ResistMenuLog( $_uid, $_log ){
+  public fuction ResistMenuLog( $_uid, $_log ){
     $query = "TRUNCATE TABLE UN".$_uid.";";
     $result = $this->_db_throw_query( "Users_Geo", $query );
 

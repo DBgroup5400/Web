@@ -5,7 +5,7 @@ body{
     position:absolute;
     top:-50px;
     left:115%;
-    width:1300px;
+    width:1270px;
     font-size:18pt;
     color:#595959;
 }
@@ -212,7 +212,7 @@ input.box8{
 	position:absolute;
 	top:0px;
 	left:0px;
-	height:100%;
+	height:170%;
 	width:195px;
 	background-color:#F8B184;
 }

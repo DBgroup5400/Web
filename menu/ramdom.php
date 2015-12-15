@@ -112,14 +112,15 @@ class hoge{/*
 		require_once "../libmenu/user.php";
 		$tmp = user();
 		$MenuID = $tmp->GetIDfromMenuName($MenuName);
-		$StuffArray= $tmp->GetFoodstuffListfromID($MenuID);
-		for($i = 0; $i < count($StuffArray); $i++) {
-  		// var_dump($StuffArray[$i]["Name"]);
- 			$StuffID = $tmp->GetIDfromFoodstuffName($StuffArray[$i]["Name"]);
-  		$price = $tmp->GetFoodstuffPrice("000001",$StuffID);
-  		// var_dump($price);
-  		$sum += $price;
-		}
+		// $StuffArray= $tmp->GetFoodstuffListfromID($MenuID);
+		// for($i = 0; $i < count($StuffArray); $i++) {
+  // 		// var_dump($StuffArray[$i]["Name"]);
+ 	// 		$StuffID = $tmp->GetIDfromFoodstuffName($StuffArray[$i]["Name"]);
+  // 		$price = $tmp->GetFoodstuffPrice("000001",$StuffID);
+  // 		// var_dump($price);
+  // 		$sum += $price;
+		// }
+		$sum = $tmp->GetMenuPrice( $SessionId, $MenuID );
 		return $sum;
 	}
 
@@ -212,7 +213,7 @@ class hoge{/*
 
 			// 料理名(dish)を取得
 			$recipe_info = $tmp->GetMenuList( 0, 0, 0, $Recipe_kind);
-			$index = rand(0,count($recipe_info));
+			$index = rand(0,count($recipe_info)-1);
 			// var_dump($recipe[$index]["Name"]);
 			$recipi_name = $recipe_info[$index]["Name"];
 			// $recipi_name = $obj->GET_NAME(0);
